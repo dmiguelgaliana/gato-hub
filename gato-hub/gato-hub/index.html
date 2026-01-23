@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>GatoHub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="logo-area">
+            <img src="assets/img/logo-gato.png" alt="Logo GatoHub" class="logo-img">
+            <div>
+                <h1>GatoHub</h1>
+            </div>
+        </div>
+        <nav class="main-nav">
+            <a href="#galeria">Galería</a>
+            <a href="#gifs">Gifs & Memes</a>
+            <a href="#curiosidades">Curiosidades</a>
+            <a href="#consejos">Consejos</a>
+            <a href="#adopcion">Adopción</a>
+            <a href="#login">Login</a>
+            <a href="#donaciones">Donaciones</a>
+        </nav>
+        <button id="themeToggle" class="theme-toggle">🌙 Modo oscuro</button>
+    </header>
+
+    <main>
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-text">
+                <h2>Bienvenido a GatoHub</h2>
+                <p>
+                    Explora una galería interactiva, guarda tus favoritos, disfruta de gifs y descubre la historia de cada gato.
+                </p>
+                <div class="hero-actions">
+                    <button class="primary-btn" onclick="scrollToSection('galeria')">Ver galería de gatos</button>
+                    <button class="secondary-btn" onclick="scrollToSection('gifs')">Ver gifs</button>
+                </div>
+                <div class="stats-bar">
+                    <div class="stat-item">
+                        <span id="statTotalGatos">20</span>
+                        <small>Gatos en la galería</small>
+                    </div>
+                    <div class="stat-item">
+                        <span id="statFavoritos">0</span>
+                        <small>Favoritos guardados</small>
+                    </div>
+                    <div class="stat-item">
+                        <span>∞</span>
+                        <small>Ronroneos posibles</small>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image-frame">
+                <div class="hero-image-glow"></div>
+                <div class="hero-image">
+                    <img id="heroCatImage" src="assets/img/gato1.jpg" alt="Gato destacado">
+                </div>
+            </div>
+        </section>
+
+        <!-- GALERÍA -->
+        <section id="galeria" class="gallery-section">
+            <header class="section-header">
+                <h2>Galería de gatos</h2>
+                <p>Filtra, busca, guarda favoritos y descubre la historia de cada uno.</p>
+            </header>
+
+            <div class="filters">
+                <input type="text" id="searchInput" placeholder="Buscar por nombre...">
+                <select id="filterRaza">
+                    <option value="todos">Todas las razas</option>
+                    <option value="siames">Siamés</option>
+                    <option value="persa">Persa</option>
+                    <option value="comun">Común europeo</option>
+                    <option value="bengali">Bengalí</option>
+                    <option value="otra">Otras razas</option>
+                </select>
+                <select id="filterEdad">
+                    <option value="todas">Todas las edades</option>
+                    <option value="cachorro">Cachorros</option>
+                    <option value="adulto">Adultos</option>
+                    <option value="senior">Senior</option>
+                </select>
+                <button id="filterFavoritos" class="chip-btn">Solo favoritos</button>
+                <button id="clearFilters" class="chip-btn">Limpiar filtros</button>
+            </div>
+
+            <div id="catsGrid" class="cats-grid"></div>
+
+            <div class="pagination">
+                <button id="prevPage" class="page-btn">Anterior</button>
+                <span id="pageInfo" class="page-info">Página 1 / 2</span>
+                <button id="nextPage" class="page-btn">Siguiente</button>
+            </div>
+        </section>
+
+        <!-- MODAL GATO -->
+        <div id="catModal" class="modal hidden">
+            <div class="modal-content">
+                <button id="closeModal" class="modal-close">&times;</button>
+                <div class="modal-body">
+                    <div class="modal-image-wrapper">
+                        <img id="modalImg" src="" alt="Gato seleccionado">
+                        <span id="modalBadgeEdad" class="modal-badge"></span>
+                    </div>
+                    <div class="modal-info">
+                        <h3 id="modalName">Nombre</h3>
+                        <p class="modal-subtitle">
+                            <span id="modalBreed"></span> · <span id="modalAge"></span>
+                        </p>
+
+                        <p class="modal-section-title">Historia</p>
+                        <p id="modalHistoria"></p>
+
+                        <p class="modal-section-title">Personalidad</p>
+                        <p id="modalPersonalidad"></p>
+
+                        <p class="modal-section-title">Detalles</p>
+                        <ul class="modal-details-list">
+                            <li><strong>Color:</strong> <span id="modalColor"></span></li>
+                            <li><strong>Peso aprox.:</strong> <span id="modalPeso"></span></li>
+                            <li><strong>Nivel de energía:</strong> <span id="modalEnergia"></span></li>
+                        </ul>
+
+                        <div id="modalTags" class="modal-tags"></div>
+
+                        <div class="modal-actions">
+                            <button id="modalFavBtn" class="secondary-btn">❤️ Añadir a favoritos</button>
+                            <button id="modalAdoptBtn" class="primary-btn">Quiero adoptar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GIFS -->
+        <section id="gifs" class="gifs-section">
+            <header class="section-header">
+                <h2>Gifs & Memes</h2>
+                <p>Una pequeña selección de gifs de gatos.</p>
+            </header>
+            <div class="gifs-grid">
+                <article class="gif-card">
+                    <img src="assets/gifs/gif1.gif" alt="Gif gato 1">
+                </article>
+                <article class="gif-card">
+                    <img src="assets/gifs/gif2.gif" alt="Gif gato 2">
+                </article>
+                <article class="gif-card">
+                    <img src="assets/gifs/gif3.gif" alt="Gif gato 3">
+                </article>
+            </div>
+        </section>
+
+        <!-- CURIOSIDADES -->
+        <section id="curiosidades" class="facts-section">
+            <header class="section-header">
+                <h2>Curiosidades sobre gatos</h2>
+                <p>Datos interesantes para entender mejor a tus compañeros felinos.</p>
+            </header>
+            <div class="facts-grid">
+                <article class="fact-card">
+                    <h3>Ronroneo</h3>
+                    <p>Los gatos ronronean cuando están relajados, pero también para calmarse a sí mismos.</p>
+                    <p class="fact-extra">Se cree que las vibraciones del ronroneo ayudan a la regeneración ósea.</p>
+                </article>
+                <article class="fact-card">
+                    <h3>Bigotes</h3>
+                    <p>Los bigotes les ayudan a medir espacios y detectar cambios en el entorno.</p>
+                    <p class="fact-extra">Nunca se deben cortar, forman parte de su sistema sensorial.</p>
+                </article>
+                <article class="fact-card">
+                    <h3>Visión</h3>
+                    <p>Pueden ver con muy poca luz gracias a una capa reflectante en sus ojos.</p>
+                    <p class="fact-extra">No ven en completa oscuridad, pero necesitan mucha menos luz que nosotros.</p>
+                </article>
+                <article class="fact-card">
+                    <h3>Rutina</h3>
+                    <p>Son animales de costumbres y los cambios bruscos pueden generarles estrés.</p>
+                    <p class="fact-extra">Mantener horarios estables les ayuda a sentirse seguros.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- CONSEJOS -->
+        <section id="consejos" class="tips-section">
+            <header class="section-header">
+                <h2>Consejos para cuidar a tu gato</h2>
+                <p>Pautas básicas para que tu gato tenga una vida larga y saludable.</p>
+            </header>
+            <div class="tips-grid">
+                <article class="tip-card">
+                    <h3>Alimentación</h3>
+                    <ul>
+                        <li>Ofrece comida de calidad adaptada a su edad.</li>
+                        <li>Controla la cantidad para evitar sobrepeso.</li>
+                        <li>Ten siempre agua fresca disponible.</li>
+                    </ul>
+                </article>
+                <article class="tip-card">
+                    <h3>Entorno</h3>
+                    <ul>
+                        <li>Proporciona rascadores y zonas altas.</li>
+                        <li>Crea escondites donde pueda sentirse seguro.</li>
+                        <li>Evita ruidos fuertes y cambios bruscos.</li>
+                    </ul>
+                </article>
+                <article class="tip-card">
+                    <h3>Salud</h3>
+                    <ul>
+                        <li>Visita al veterinario al menos una vez al año.</li>
+                        <li>Mantén vacunas y desparasitaciones al día.</li>
+                        <li>Observa cambios de comportamiento o apetito.</li>
+                    </ul>
+                </article>
+                <article class="tip-card">
+                    <h3>Juego y vínculo</h3>
+                    <ul>
+                        <li>Juega a diario con él.</li>
+                        <li>Respeta su espacio cuando no quiera contacto.</li>
+                        <li>Refuerza con caricias y palabras suaves.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <!-- ADOPCIÓN -->
+        <section id="adopcion" class="adoption-section">
+            <header class="section-header">
+                <h2>Formulario de adopción</h2>
+                <p>Si te interesa adoptar, rellena este formulario y nos pondremos en contacto contigo.</p>
+            </header>
+            <form class="adoption-form" action="https://formspree.io/f/your-id" method="POST">
+                <div class="form-group">
+                    <label for="nombre">Nombre completo</label>
+                    <input type="text" id="nombre" name="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="emailAdopcion">Correo electrónico</label>
+                    <input type="email" id="emailAdopcion" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="telefono">Teléfono</label>
+                    <input type="tel" id="telefono" name="telefono" required>
+                </div>
+                <div class="form-group">
+                    <label for="gatoInteres">Gato de interés</label>
+                    <input type="text" id="gatoInteres" name="gatoInteres" placeholder="Ej: Luna, Milo..." required>
+                </div>
+                <div class="form-group">
+                    <label for="mensaje">Cuéntanos sobre tu hogar</label>
+                    <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="primary-btn">Enviar solicitud</button>
+            </form>
+        </section>
+
+        <!-- LOGIN / REGISTRO -->
+        <section id="login" class="login-section">
+            <header class="section-header">
+                <h2>Acceso a tu cuenta</h2>
+                <p>Crea una cuenta o inicia sesión para gestionar tus datos.</p>
+            </header>
+
+            <div class="login-forms-wrapper">
+                <div class="login-form-block">
+                    <h3>Crear cuenta</h3>
+                    <form id="registerForm" class="login-form">
+                        <div class="form-group">
+                            <label for="regNombre">Nombre de usuario</label>
+                            <input type="text" id="regNombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="regEmail">Correo electrónico</label>
+                            <input type="email" id="regEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="regPassword">Contraseña</label>
+                            <input type="password" id="regPassword" required>
+                        </div>
+                        <button type="submit" class="primary-btn">Registrarse</button>
+                    </form>
+                </div>
+
+                <div class="login-form-block">
+                    <h3>Iniciar sesión</h3>
+                    <form id="loginForm" class="login-form">
+                        <div class="form-group">
+                            <label for="loginEmail">Correo electrónico</label>
+                            <input type="email" id="loginEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Contraseña</label>
+                            <input type="password" id="loginPassword" required>
+                        </div>
+                        <button type="submit" class="secondary-btn">Entrar</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- DONACIONES -->
+        <section id="donaciones" class="donation-section">
+            <header class="section-header">
+                <h2>Donaciones para el refugio</h2>
+                <p>Cada aportación ayuda a que más gatos tengan una segunda oportunidad.</p>
+            </header>
+            <form id="donationForm" class="donation-form">
+                <div class="form-group">
+                    <label for="donNombre">Nombre del titular</label>
+                    <input type="text" id="donNombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="donEmail">Correo electrónico</label>
+                    <input type="email" id="donEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="donNumero">Número de tarjeta</label>
+                    <input type="text" id="donNumero" maxlength="16" inputmode="numeric" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="donFecha">Fecha de caducidad</label>
+                        <input type="text" id="donFecha" placeholder="MM/YY" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="donCvv">CVV</label>
+                        <input type="password" id="donCvv" maxlength="3" inputmode="numeric" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="donCantidad">Cantidad (€)</label>
+                    <div class="amount-wrapper">
+                        <span class="amount-prefix">€</span>
+                        <input type="number" id="donCantidad" min="1" step="1" required>
+                    </div>
+                </div>
+                <button type="submit" class="primary-btn">Realizar donación</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <p>GatoHub · 2026</p>
+    </footer>
+
+    <button id="backToTop" class="back-to-top">↑ Arriba</button>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
