@@ -1,5 +1,5 @@
 /* ============================================================
-   GATOHUB - MAIN.JS COMPLETO
+   GATOHUB - MAIN.JS COMPLETO (MODO OSCURO + IDIOMAS)
    ============================================================ */
 
 /* =========================
@@ -386,21 +386,24 @@ function closeCatModal() {
 }
 
 /* =========================
-   TEMA OSCURO
+   TEMA OSCURO (ARREGLADO)
    ========================= */
 function loadTheme() {
     const stored = localStorage.getItem("gatoHubTheme");
-    if (stored === "dark") {
-        document.body.classList.add("dark");
-        themeToggle.textContent = "☀️ Modo claro";
-    } else {
-        document.body.classList.remove("dark");
-        themeToggle.textContent = "🌙 Modo oscuro";
-    }
+    const isDark = stored === "dark";
+
+    document.body.classList.toggle("dark", isDark);
+    document.documentElement.classList.toggle("dark", isDark);
+
+    themeToggle.textContent = isDark ? "☀️ Modo claro" : "🌙 Modo oscuro";
 }
 
 function toggleTheme() {
-    const isDark = document.body.classList.toggle("dark");
+    const isDark = !document.body.classList.contains("dark");
+
+    document.body.classList.toggle("dark", isDark);
+    document.documentElement.classList.toggle("dark", isDark);
+
     localStorage.setItem("gatoHubTheme", isDark ? "dark" : "light");
     themeToggle.textContent = isDark ? "☀️ Modo claro" : "🌙 Modo oscuro";
 }
@@ -445,10 +448,11 @@ function validateDonationCvv(value) {
 }
 
 /* =========================
-   IDIOMAS
+   IDIOMAS (INTERFAZ COMPLETA)
    ========================= */
 const i18nTexts = {
     es: {
+        // Hero
         heroTitle: "Bienvenido a GatoHub",
         heroSubtitle: "Explora la galería, guarda favoritos y descubre historias únicas.",
         btnVerGaleria: "Ver galería",
@@ -456,6 +460,9 @@ const i18nTexts = {
         statGatosLabel: "Gatos",
         statFavoritosLabel: "Favoritos",
         statRonroneosLabel: "Ronroneos",
+        // Nav
+        nav: ["Galería", "Gifs", "Curiosidades", "Consejos", "Adopción", "Login", "Donaciones"],
+        // Secciones
         galeriaTitle: "Galería de gatos",
         galeriaSubtitle: "Filtra, busca y descubre a cada uno.",
         gifsTitle: "Gifs de gatos",
@@ -467,12 +474,14 @@ const i18nTexts = {
         iniciarSesionTitle: "Iniciar sesión",
         donacionesTitle: "Donaciones",
         footerText: "GatoHub · 2026",
+        // Formularios adopción
         labelNombre: "Nombre completo",
         labelEmail: "Correo electrónico",
         labelTelefono: "Teléfono",
         labelGatoInteres: "Gato de interés",
         labelMensaje: "Cuéntanos sobre tu hogar",
         btnEnviarAdopcion: "Enviar solicitud",
+        // Formularios login
         labelUsuario: "Usuario",
         labelEmailRegistro: "Email",
         labelPasswordRegistro: "Contraseña",
@@ -480,6 +489,7 @@ const i18nTexts = {
         labelEmailLogin: "Email",
         labelPasswordLogin: "Contraseña",
         btnEntrar: "Entrar",
+        // Donaciones
         labelTitular: "Titular",
         labelEmailDonacion: "Email",
         labelNumeroTarjeta: "Número de tarjeta",
@@ -487,17 +497,23 @@ const i18nTexts = {
         labelCVV: "CVV",
         labelCantidad: "Cantidad (€)",
         btnDonar: "Donar",
+        // Modal
         modalHistoriaTitle: "Historia",
         modalPersonalidadTitle: "Personalidad",
         modalDetallesTitle: "Detalles",
         colorLabel: "Color:",
         pesoLabel: "Peso:",
         energiaLabel: "Energía:",
+        // Filtros
         searchPlaceholder: "Buscar por nombre...",
         filterFavoritos: "Solo favoritos",
         clearFilters: "Limpiar",
         prevPage: "Anterior",
         nextPage: "Siguiente",
+        // Selects filtros
+        filterRaza: ["Todas las razas", "Siamés", "Persa", "Común europeo", "Bengalí", "Otras"],
+        filterEdad: ["Todas las edades", "Cachorros", "Adultos", "Senior"],
+        // Alert idioma
         langAlert: "Idioma cambiado a español."
     },
     ca: {
@@ -508,6 +524,7 @@ const i18nTexts = {
         statGatosLabel: "Gats",
         statFavoritosLabel: "Favorits",
         statRonroneosLabel: "Roncs",
+        nav: ["Galeria", "Gifs", "Curiositats", "Consells", "Adopció", "Login", "Donacions"],
         galeriaTitle: "Galeria de gats",
         galeriaSubtitle: "Filtra, cerca i descobreix cadascun.",
         gifsTitle: "Gifs de gats",
@@ -550,6 +567,8 @@ const i18nTexts = {
         clearFilters: "Netejar",
         prevPage: "Anterior",
         nextPage: "Següent",
+        filterRaza: ["Totes les races", "Siamès", "Persa", "Comú europeu", "Bengalí", "Altres"],
+        filterEdad: ["Totes les edats", "Cadells", "Adults", "Sènior"],
         langAlert: "Idioma canviat a català."
     },
     en: {
@@ -560,6 +579,7 @@ const i18nTexts = {
         statGatosLabel: "Cats",
         statFavoritosLabel: "Favorites",
         statRonroneosLabel: "Purrs",
+        nav: ["Gallery", "Gifs", "Curiosities", "Tips", "Adoption", "Login", "Donations"],
         galeriaTitle: "Cat gallery",
         galeriaSubtitle: "Filter, search and discover each one.",
         gifsTitle: "Cat gifs",
@@ -602,6 +622,8 @@ const i18nTexts = {
         clearFilters: "Clear",
         prevPage: "Previous",
         nextPage: "Next",
+        filterRaza: ["All breeds", "Siamese", "Persian", "European shorthair", "Bengal", "Others"],
+        filterEdad: ["All ages", "Kittens", "Adults", "Senior"],
         langAlert: "Language changed to English."
     }
 };
@@ -614,6 +636,7 @@ function applyLanguage(lang) {
         if (el) el.textContent = text;
     };
 
+    // Hero
     byId("heroTitle", t.heroTitle);
     byId("heroSubtitle", t.heroSubtitle);
     byId("btnVerGaleria", t.btnVerGaleria);
@@ -621,6 +644,14 @@ function applyLanguage(lang) {
     byId("statGatosLabel", t.statGatosLabel);
     byId("statFavoritosLabel", t.statFavoritosLabel);
     byId("statRonroneosLabel", t.statRonroneosLabel);
+
+    // Nav (en orden)
+    const navLinks = document.querySelectorAll(".main-nav a");
+    if (navLinks.length === t.nav.length) {
+        navLinks.forEach((a, i) => a.textContent = t.nav[i]);
+    }
+
+    // Secciones
     byId("galeriaTitle", t.galeriaTitle);
     byId("galeriaSubtitle", t.galeriaSubtitle);
     byId("gifsTitle", t.gifsTitle);
@@ -633,6 +664,7 @@ function applyLanguage(lang) {
     byId("donacionesTitle", t.donacionesTitle);
     byId("footerText", t.footerText);
 
+    // Formularios adopción
     byId("labelNombre", t.labelNombre);
     byId("labelEmail", t.labelEmail);
     byId("labelTelefono", t.labelTelefono);
@@ -640,15 +672,16 @@ function applyLanguage(lang) {
     byId("labelMensaje", t.labelMensaje);
     byId("btnEnviarAdopcion", t.btnEnviarAdopcion);
 
+    // Login
     byId("labelUsuario", t.labelUsuario);
     byId("labelEmailRegistro", t.labelEmailRegistro);
     byId("labelPasswordRegistro", t.labelPasswordRegistro);
     byId("btnRegistrarse", t.btnRegistrarse);
-
     byId("labelEmailLogin", t.labelEmailLogin);
     byId("labelPasswordLogin", t.labelPasswordLogin);
     byId("btnEntrar", t.btnEntrar);
 
+    // Donaciones
     byId("labelTitular", t.labelTitular);
     byId("labelEmailDonacion", t.labelEmailDonacion);
     byId("labelNumeroTarjeta", t.labelNumeroTarjeta);
@@ -657,6 +690,7 @@ function applyLanguage(lang) {
     byId("labelCantidad", t.labelCantidad);
     byId("btnDonar", t.btnDonar);
 
+    // Modal
     byId("modalHistoriaTitle", t.modalHistoriaTitle);
     byId("modalPersonalidadTitle", t.modalPersonalidadTitle);
     byId("modalDetallesTitle", t.modalDetallesTitle);
@@ -664,19 +698,28 @@ function applyLanguage(lang) {
     byId("pesoLabel", t.pesoLabel);
     byId("energiaLabel", t.energiaLabel);
 
-    const search = document.getElementById("searchInput");
-    if (search) search.placeholder = t.searchPlaceholder;
+    // Filtros
+    if (searchInput) searchInput.placeholder = t.searchPlaceholder;
+    if (filterFavoritosBtn) filterFavoritosBtn.textContent = t.filterFavoritos;
+    if (clearFiltersBtn) clearFiltersBtn.textContent = t.clearFilters;
+    if (prevPageBtn) prevPageBtn.textContent = t.prevPage;
+    if (nextPageBtn) nextPageBtn.textContent = t.nextPage;
 
-    const favBtn = document.getElementById("filterFavoritos");
-    if (favBtn) favBtn.textContent = t.filterFavoritos;
+    // Select raza
+    const razaOptions = filterRaza ? filterRaza.querySelectorAll("option") : [];
+    if (razaOptions.length === t.filterRaza.length) {
+        t.filterRaza.forEach((txt, i) => {
+            razaOptions[i].textContent = txt;
+        });
+    }
 
-    const clearBtn = document.getElementById("clearFilters");
-    if (clearBtn) clearBtn.textContent = t.clearFilters;
-
-    const prev = document.getElementById("prevPage");
-    const next = document.getElementById("nextPage");
-    if (prev) prev.textContent = t.prevPage;
-    if (next) next.textContent = t.nextPage;
+    // Select edad
+    const edadOptions = filterEdad ? filterEdad.querySelectorAll("option") : [];
+    if (edadOptions.length === t.filterEdad.length) {
+        t.filterEdad.forEach((txt, i) => {
+            edadOptions[i].textContent = txt;
+        });
+    }
 }
 
 /* =========================
