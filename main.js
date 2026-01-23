@@ -165,6 +165,8 @@ const i18nTexts = {
         colorLabel: "Color:",
         pesoLabel: "Peso:",
         energiaLabel: "Energía:",
+        modalBreedLabel: "Raza:",
+        modalAgeLabel: "Edad:",
         searchPlaceholder: "Buscar por nombre...",
         filterFavoritos: "Solo favoritos",
         clearFilters: "Limpiar",
@@ -182,7 +184,9 @@ const i18nTexts = {
             "Reserva tiempo diario para jugar con tu gato.",
             "Visita al veterinario al menos una vez al año."
         ],
-        langAlert: "Idioma cambiado a español."
+        langAlert: "Idioma cambiado a español.",
+        noCatsFound: "No se han encontrado gatos.",
+        pageLabel: "Página"
     },
     ca: {
         heroTitle: "Benvingut a GatoHub",
@@ -230,6 +234,8 @@ const i18nTexts = {
         colorLabel: "Color:",
         pesoLabel: "Pes:",
         energiaLabel: "Energia:",
+        modalBreedLabel: "Raça:",
+        modalAgeLabel: "Edat:",
         searchPlaceholder: "Cercar per nom...",
         filterFavoritos: "Només favorits",
         clearFilters: "Netejar",
@@ -247,7 +253,9 @@ const i18nTexts = {
             "Reserva temps diari per jugar amb el teu gat.",
             "Visita el veterinari almenys un cop l'any."
         ],
-        langAlert: "Idioma canviat a català."
+        langAlert: "Idioma canviat a català.",
+        noCatsFound: "No s'han trobat gats.",
+        pageLabel: "Pàgina"
     },
     en: {
         heroTitle: "Welcome to GatoHub",
@@ -295,6 +303,8 @@ const i18nTexts = {
         colorLabel: "Color:",
         pesoLabel: "Weight:",
         energiaLabel: "Energy:",
+        modalBreedLabel: "Breed:",
+        modalAgeLabel: "Age:",
         searchPlaceholder: "Search by name...",
         filterFavoritos: "Only favorites",
         clearFilters: "Clear",
@@ -312,7 +322,9 @@ const i18nTexts = {
             "Set aside daily time to play with your cat.",
             "Visit the vet at least once a year."
         ],
-        langAlert: "Language changed to English."
+        langAlert: "Language changed to English.",
+        noCatsFound: "No cats found.",
+        pageLabel: "Page"
     }
 };
 
@@ -340,6 +352,8 @@ const modalBadgeEdad = document.getElementById("modalBadgeEdad");
 const modalTagsContainer = document.getElementById("modalTags");
 const modalFavBtn = document.getElementById("modalFavBtn");
 const modalAdoptBtn = document.getElementById("modalAdoptBtn");
+const modalBreedLabel = document.getElementById("modalBreedLabel");
+const modalAgeLabel = document.getElementById("modalAgeLabel");
 
 const themeToggle = document.getElementById("themeToggle");
 const languageSelect = document.getElementById("languageSelect");
@@ -434,14 +448,14 @@ function setRandomHeroImage() {
 
 /* RENDER Y PAGINACIÓN */
 function updatePagination(totalPages) {
+    const t = i18nTexts[currentLang] || i18nTexts.es;
     if (totalPages === 0) {
-        pageInfo.textContent = "Página 0 / 0";
+        pageInfo.textContent = `${t.pageLabel} 0 / 0`;
         prevPageBtn.disabled = true;
         nextPageBtn.disabled = true;
         return;
     }
-    const t = i18nTexts[currentLang];
-    pageInfo.textContent = `${t ? t.prevPage.split(" ")[0] : "Página"} ${currentPage} / ${totalPages}`;
+    pageInfo.textContent = `${t.pageLabel} ${currentPage} / ${totalPages}`;
     prevPageBtn.disabled = currentPage === 1;
     nextPageBtn.disabled = currentPage === totalPages;
 }
@@ -452,10 +466,11 @@ function updateStats() {
 }
 
 function renderCats(list) {
+    const t = i18nTexts[currentLang] || i18nTexts.es;
     catsGrid.innerHTML = "";
 
     if (list.length === 0) {
-        catsGrid.innerHTML = "<p>No se han encontrado gatos.</p>";
+        catsGrid.innerHTML = `<p>${t.noCatsFound}</p>`;
         updatePagination(0);
         return;
     }
@@ -475,8 +490,8 @@ function renderCats(list) {
             <img src="${cat.img}" alt="${cat.nombre}">
             <div class="cat-card-body">
                 <h3>${cat.nombre}</h3>
-                <p><strong>${i18nTexts[currentLang].modalBreedLabel || "Raza"}:</strong> ${formatearRaza(cat.raza, currentLang)}</p>
-                <p><strong>${i18nTexts[currentLang].modalAgeLabel || "Edad"}:</strong> ${edadTexto}</p>
+                <p><strong>${t.modalBreedLabel}</strong> ${formatearRaza(cat.raza, currentLang)}</p>
+                <p><strong>${t.modalAgeLabel}</strong> ${edadTexto}</p>
             </div>
             <span class="favorite-icon ${favoritos.has(cat.id) ? "active" : ""}" data-id="${cat.id}">
                 ${favoritos.has(cat.id) ? "❤️" : "🤍"}
@@ -542,18 +557,18 @@ function toggleFavorite(catId) {
     applyFilters();
     updateStats();
     if (currentModalCatId === catId) {
-        modalFavBtn.textContent = favoritos.has(catId)
-            ? "❤️ En favoritos"
-            : "❤️ Añadir a favoritos";
-        if (currentLang === "ca") {
-            modalFavBtn.textContent = favoritos.has(catId)
-                ? "❤️ Als favorits"
-                : "❤️ Afegir a favorits";
-        }
         if (currentLang === "en") {
             modalFavBtn.textContent = favoritos.has(catId)
                 ? "❤️ In favorites"
                 : "❤️ Add to favorites";
+        } else if (currentLang === "ca") {
+            modalFavBtn.textContent = favoritos.has(catId)
+                ? "❤️ Als favorits"
+                : "❤️ Afegir a favorits";
+        } else {
+            modalFavBtn.textContent = favoritos.has(catId)
+                ? "❤️ En favoritos"
+                : "❤️ Añadir a favoritos";
         }
     }
 }
@@ -562,6 +577,7 @@ function toggleFavorite(catId) {
 function openCatModal(cat) {
     currentModalCatId = cat.id;
     const langData = i18nCats[currentLang][cat.id];
+    const t = i18nTexts[currentLang] || i18nTexts.es;
 
     modalImg.src = cat.img;
     modalName.textContent = cat.nombre;
@@ -573,7 +589,9 @@ function openCatModal(cat) {
     modalPeso.textContent = cat.peso;
     modalEnergia.textContent = langData ? langData.energia : "";
 
-    const t = i18nTexts[currentLang];
+    modalBreedLabel.textContent = t.modalBreedLabel;
+    modalAgeLabel.textContent = t.modalAgeLabel;
+
     modalBadgeEdad.textContent =
         cat.edadCategoria === "cachorro"
             ? (currentLang === "en" ? "Kitten" : currentLang === "ca" ? "Cadell" : "Cachorro")
@@ -732,6 +750,8 @@ function applyLanguage(lang) {
     byId("colorLabel", t.colorLabel);
     byId("pesoLabel", t.pesoLabel);
     byId("energiaLabel", t.energiaLabel);
+    if (modalBreedLabel) modalBreedLabel.textContent = t.modalBreedLabel;
+    if (modalAgeLabel) modalAgeLabel.textContent = t.modalAgeLabel;
 
     if (searchInput) searchInput.placeholder = t.searchPlaceholder;
     if (filterFavoritosBtn) filterFavoritosBtn.textContent = t.filterFavoritos;
