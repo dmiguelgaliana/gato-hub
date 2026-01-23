@@ -1,100 +1,121 @@
-// === DATOS DE GATOS ===
+// =========================
+//   DATOS DE LOS GATOS
+// =========================
 const cats = [
     { id: 1, nombre: "Luna", raza: "siames", edadCategoria: "adulto", edadTexto: "3 años", img: "assets/img/gato1.jpg",
-      historia: "Luna fue rescatada de una colonia felina en un barrio tranquilo. Al principio desconfiaba de todo, pero poco a poco empezó a confiar en las personas que la cuidaban. Ahora le encanta dormir cerca de la ventana y observar el mundo desde un lugar seguro.",
-      personalidad: "Muy observadora, cariñosa cuando coge confianza, algo tímida con desconocidos.",
+      historia: "Luna fue rescatada de una colonia felina. Al principio desconfiaba de todo, pero ahora disfruta de la calma del hogar.",
+      personalidad: "Observadora, cariñosa cuando coge confianza, algo tímida con desconocidos.",
       color: "Crema con puntos marrones", peso: "4,2 kg", energia: "Media",
       tags: ["Tranquila", "Cariñosa", "Ideal piso"] },
+
     { id: 2, nombre: "Milo", raza: "persa", edadCategoria: "cachorro", edadTexto: "6 meses", img: "assets/img/gato2.jpg",
-      historia: "Milo nació en una camada no deseada y fue entregado a una protectora. Desde pequeño ha sido el alma de la habitación.",
+      historia: "Milo nació en una camada no deseada y fue entregado a una protectora.",
       personalidad: "Extremadamente juguetón, curioso, algo torpe pero encantador.",
       color: "Blanco y crema", peso: "2,1 kg", energia: "Alta",
       tags: ["Juguetón", "Cachorro", "Necesita juego diario"] },
+
     { id: 3, nombre: "Nala", raza: "comun", edadCategoria: "adulto", edadTexto: "2 años", img: "assets/img/gato3.jpg",
-      historia: "Nala vivía con una familia que no podía seguir cuidándola. Siempre busca una mano amiga para recibir caricias.",
+      historia: "Nala vivía con una familia que no podía seguir cuidándola.",
       personalidad: "Muy dulce, tranquila, le gusta la rutina.",
       color: "Atigrada marrón", peso: "3,8 kg", energia: "Media-baja",
       tags: ["Tranquila", "Apta para niños", "Muy mimosa"] },
+
     { id: 4, nombre: "Simba", raza: "bengali", edadCategoria: "adulto", edadTexto: "4 años", img: "assets/img/gato4.jpg",
-      historia: "Simba fue encontrado explorando un parque. Es muy listo y aprende rápido.",
+      historia: "Simba fue encontrado explorando un parque, siempre atento a todo.",
       personalidad: "Curioso, activo, muy inteligente.",
       color: "Moteado dorado", peso: "4,5 kg", energia: "Alta",
       tags: ["Activo", "Inteligente", "Necesita estímulos"] },
+
     { id: 5, nombre: "Coco", raza: "comun", edadCategoria: "senior", edadTexto: "9 años", img: "assets/img/gato5.jpg",
-      historia: "Coco vivió muchos años con una persona mayor. Solo pide un sofá cómodo y compañía tranquila.",
+      historia: "Coco vivió muchos años con una persona mayor.",
       personalidad: "Muy calmado, extremadamente cariñoso.",
       color: "Negro con algunas canas", peso: "5,0 kg", energia: "Baja",
       tags: ["Senior", "Muy cariñoso", "Ideal hogar tranquilo"] },
+
     { id: 6, nombre: "Kira", raza: "otra", edadCategoria: "cachorro", edadTexto: "4 meses", img: "assets/img/gato6.jpg",
-      historia: "Kira fue encontrada en una caja de cartón. Es la más valiente de la camada.",
+      historia: "Kira fue encontrada en una caja de cartón junto a sus hermanos.",
       personalidad: "Valiente, curiosa, muy activa.",
       color: "Tricolor", peso: "1,6 kg", energia: "Muy alta",
       tags: ["Cachorra", "Exploradora", "Necesita compañía"] },
+
     { id: 7, nombre: "Tom", raza: "otra", edadCategoria: "adulto", edadTexto: "5 años", img: "assets/img/gato7.jpg",
       historia: "Tom vivía en la calle pero siempre buscaba mimos.",
       personalidad: "Muy sociable, confiado, le encanta estar acompañado.",
       color: "Gris y blanco", peso: "4,3 kg", energia: "Media",
       tags: ["Sociable", "Apto con otros gatos", "Cariñoso"] },
+
     { id: 8, nombre: "Mimi", raza: "persa", edadCategoria: "senior", edadTexto: "10 años", img: "assets/img/gato8.jpg",
       historia: "Mimi fue entregada por una familia que se mudaba.",
       personalidad: "Serena, algo independiente, muy elegante.",
       color: "Naranja claro", peso: "4,0 kg", energia: "Baja",
       tags: ["Senior", "Tranquila", "Ideal hogar calmado"] },
+
     { id: 9, nombre: "Bola", raza: "comun", edadCategoria: "adulto", edadTexto: "3 años", img: "assets/img/gato9.jpg",
-      historia: "Bola llegó con sobrepeso, pero ha mejorado mucho.",
+      historia: "Bola llegó con sobrepeso, pero ha mejorado mucho con dieta.",
       personalidad: "Bonachón, tranquilo, algo glotón.",
       color: "Blanco y gris", peso: "5,5 kg", energia: "Media-baja",
       tags: ["Tranquilo", "Glotón", "Muy abrazable"] },
+
     { id: 10, nombre: "Toby", raza: "otra", edadCategoria: "adulto", edadTexto: "4 años", img: "assets/img/gato10.jpg",
-      historia: "Toby fue encontrado en un garaje.",
+      historia: "Toby fue encontrado en un garaje donde se refugiaba.",
       personalidad: "Cariñoso, le encanta frotarse contra las piernas.",
       color: "Marrón y blanco", peso: "4,1 kg", energia: "Media",
       tags: ["Cariñoso", "Agradecido", "Ideal primer gato"] },
+
     { id: 11, nombre: "Lola", raza: "persa", edadCategoria: "cachorro", edadTexto: "7 meses", img: "assets/img/gato11.jpg",
       historia: "Lola fue la más pequeña de su camada.",
       personalidad: "Juguetona, dulce, algo dependiente.",
       color: "Blanco puro", peso: "2,3 kg", energia: "Alta",
       tags: ["Cachorra", "Juguetona", "Necesita atención"] },
+
     { id: 12, nombre: "Rocky", raza: "bengali", edadCategoria: "adulto", edadTexto: "3 años", img: "assets/img/gato12.jpg",
-      historia: "Rocky vivía en una casa con jardín.",
+      historia: "Rocky vivía en una casa con jardín y mucho espacio.",
       personalidad: "Muy activo, curioso, algo travieso.",
       color: "Dorado moteado", peso: "4,7 kg", energia: "Muy alta",
       tags: ["Activo", "Necesita espacio", "Juguetón"] },
+
     { id: 13, nombre: "Sombra", raza: "comun", edadCategoria: "adulto", edadTexto: "2 años", img: "assets/img/gato13.jpg",
       historia: "Sombra se movía entre tejados como un ninja.",
       personalidad: "Independiente, observador, algo tímido.",
       color: "Negro", peso: "3,9 kg", energia: "Media",
       tags: ["Independiente", "Elegante", "Ideal personas tranquilas"] },
+
     { id: 14, nombre: "Nube", raza: "otra", edadCategoria: "senior", edadTexto: "11 años", img: "assets/img/gato14.jpg",
-      historia: "Nube busca su retiro definitivo.",
+      historia: "Nube busca su retiro definitivo en un hogar tranquilo.",
       personalidad: "Muy calmado, le encantan las siestas largas.",
       color: "Blanco grisáceo", peso: "4,6 kg", energia: "Baja",
       tags: ["Senior", "Muy tranquilo", "Ideal compañía"] },
+
     { id: 15, nombre: "Pixel", raza: "siames", edadCategoria: "cachorro", edadTexto: "5 meses", img: "assets/img/gato15.jpg",
-      historia: "Pixel no para quieto.",
+      historia: "Pixel no para quieto, siempre está investigando algo.",
       personalidad: "Hiperactivo, curioso, muy vocal.",
       color: "Crema con puntos oscuros", peso: "2,0 kg", energia: "Muy alta",
       tags: ["Cachorro", "Muy activo", "Necesita juego"] },
+
     { id: 16, nombre: "Chispa", raza: "otra", edadCategoria: "adulto", edadTexto: "3 años", img: "assets/img/gato16.jpg",
       historia: "Chispa apareció en un taller mecánico.",
       personalidad: "Curioso, juguetón, algo travieso.",
       color: "Atigrado gris", peso: "4,0 kg", energia: "Alta",
       tags: ["Curioso", "Explorador", "Juguetón"] },
+
     { id: 17, nombre: "Rayo", raza: "bengali", edadCategoria: "adulto", edadTexto: "4 años", img: "assets/img/gato17.jpg",
       historia: "Rayo corre como si siempre tuviera prisa.",
       personalidad: "Muy activo, juguetón, algo intenso.",
       color: "Dorado con manchas oscuras", peso: "4,8 kg", energia: "Muy alta",
       tags: ["Muy activo", "Juguetón", "Necesita ejercicio"] },
+
     { id: 18, nombre: "Mora", raza: "persa", edadCategoria: "senior", edadTexto: "12 años", img: "assets/img/gato18.jpg",
       historia: "Mora ha vivido siempre en interior.",
       personalidad: "Serena, algo independiente, muy limpia.",
       color: "Gris humo", peso: "3,7 kg", energia: "Baja",
       tags: ["Senior", "Elegante", "Ideal hogar silencioso"] },
+
     { id: 19, nombre: "Choco", raza: "comun", edadCategoria: "adulto", edadTexto: "3 años", img: "assets/img/gato19.jpg",
       historia: "Choco fue encontrado cerca de una cafetería.",
       personalidad: "Dulce, sociable, le gusta estar acompañado.",
       color: "Marrón chocolate", peso: "4,2 kg", energia: "Media",
       tags: ["Dulce", "Sociable", "Ideal familias"] },
+
     { id: 20, nombre: "Kiwi", raza: "otra", edadCategoria: "cachorro", edadTexto: "6 meses", img: "assets/img/gato20.jpg",
       historia: "Kiwi fue el único superviviente de su camada.",
       personalidad: "Cariñoso, algo tímido al principio, muy juguetón.",
@@ -102,7 +123,9 @@ const cats = [
       tags: ["Cachorro", "Cariñoso", "Necesita paciencia"] }
 ];
 
-// === ELEMENTOS DOM ===
+// =========================
+//   REFERENCIAS DOM
+// =========================
 const heroCatImage = document.getElementById("heroCatImage");
 const catsGrid = document.getElementById("catsGrid");
 const searchInput = document.getElementById("searchInput");
@@ -128,7 +151,6 @@ const modalFavBtn = document.getElementById("modalFavBtn");
 const modalAdoptBtn = document.getElementById("modalAdoptBtn");
 
 const themeToggle = document.getElementById("themeToggle");
-
 const statTotalGatos = document.getElementById("statTotalGatos");
 const statFavoritos = document.getElementById("statFavoritos");
 
@@ -138,24 +160,25 @@ const pageInfo = document.getElementById("pageInfo");
 
 const backToTopBtn = document.getElementById("backToTop");
 
-// Formularios
 const adoptionForm = document.querySelector(".adoption-form");
 const registerForm = document.getElementById("registerForm");
 const loginForm = document.getElementById("loginForm");
 const donationForm = document.getElementById("donationForm");
 
-// === ESTADO ===
+// =========================
+//   ESTADO
+// =========================
 let favoritos = new Set();
 let currentPage = 1;
 const pageSize = 10;
 let filteredCats = [...cats];
 let showOnlyFavorites = false;
 let currentModalCatId = null;
-
-// Usuarios (pseudo base de datos en localStorage)
 let users = [];
 
-// === UTILIDADES ===
+// =========================
+//   UTILIDADES
+// =========================
 function formatearRaza(raza) {
     const map = {
         siames: "Siamés",
@@ -167,17 +190,21 @@ function formatearRaza(raza) {
     return map[raza] || raza;
 }
 
-// FAVORITOS LOCALSTORAGE
 function loadFavoritos() {
     const stored = localStorage.getItem("gatoHubFavoritos");
-    if (stored) favoritos = new Set(JSON.parse(stored));
+    if (stored) {
+        try {
+            favoritos = new Set(JSON.parse(stored));
+        } catch {
+            favoritos = new Set();
+        }
+    }
 }
 
 function saveFavoritos() {
     localStorage.setItem("gatoHubFavoritos", JSON.stringify([...favoritos]));
 }
 
-// USUARIOS LOCALSTORAGE
 function loadUsers() {
     const stored = localStorage.getItem("gatoHubUsers");
     if (stored) {
@@ -193,13 +220,31 @@ function saveUsers() {
     localStorage.setItem("gatoHubUsers", JSON.stringify(users));
 }
 
-// IMAGEN ALEATORIA HERO
 function setRandomHeroImage() {
     const randomCat = cats[Math.floor(Math.random() * cats.length)];
     heroCatImage.src = randomCat.img;
 }
 
-// RENDERIZADO
+// =========================
+//   RENDERIZADO GALERÍA
+// =========================
+function updatePagination(totalPages) {
+    if (totalPages === 0) {
+        pageInfo.textContent = "Página 0 / 0";
+        prevPageBtn.disabled = true;
+        nextPageBtn.disabled = true;
+        return;
+    }
+    pageInfo.textContent = `Página ${currentPage} / ${totalPages}`;
+    prevPageBtn.disabled = currentPage === 1;
+    nextPageBtn.disabled = currentPage === totalPages;
+}
+
+function updateStats() {
+    statTotalGatos.textContent = cats.length;
+    statFavoritos.textContent = favoritos.size;
+}
+
 function renderCats(list) {
     catsGrid.innerHTML = "";
 
@@ -235,7 +280,8 @@ function renderCats(list) {
             openCatModal(cat);
         });
 
-        card.querySelector(".favorite-icon").addEventListener("click", e => {
+        const favIcon = card.querySelector(".favorite-icon");
+        favIcon.addEventListener("click", e => {
             e.stopPropagation();
             toggleFavorite(cat.id);
         });
@@ -246,7 +292,9 @@ function renderCats(list) {
     updatePagination(totalPages);
 }
 
-// FILTROS
+// =========================
+//   FILTROS
+// =========================
 function applyFilters() {
     const searchTerm = searchInput.value.toLowerCase();
     const raza = filterRaza.value;
@@ -277,7 +325,26 @@ function clearFilters() {
     updateStats();
 }
 
-// MODAL
+// =========================
+//   FAVORITOS
+// =========================
+function toggleFavorite(catId) {
+    if (favoritos.has(catId)) {
+        favoritos.delete(catId);
+    } else {
+        favoritos.add(catId);
+    }
+    saveFavoritos();
+    applyFilters();
+    updateStats();
+    if (currentModalCatId === catId) {
+        modalFavBtn.textContent = favoritos.has(catId) ? "❤️ En favoritos" : "❤️ Añadir a favoritos";
+    }
+}
+
+// =========================
+//   MODAL
+// =========================
 function openCatModal(cat) {
     currentModalCatId = cat.id;
     modalImg.src = cat.img;
@@ -289,8 +356,10 @@ function openCatModal(cat) {
     modalColor.textContent = cat.color;
     modalPeso.textContent = cat.peso;
     modalEnergia.textContent = cat.energia;
-    modalBadgeEdad.textContent = cat.edadCategoria === "cachorro" ? "Cachorro" :
-                                 cat.edadCategoria === "adulto" ? "Adulto" : "Senior";
+
+    modalBadgeEdad.textContent =
+        cat.edadCategoria === "cachorro" ? "Cachorro" :
+        cat.edadCategoria === "adulto" ? "Adulto" : "Senior";
 
     modalTagsContainer.innerHTML = "";
     cat.tags.forEach(tag => {
@@ -310,189 +379,77 @@ function closeCatModal() {
     currentModalCatId = null;
 }
 
-// FAVORITOS
-function toggleFavorite(catId) {
-    if (favoritos.has(catId)) {
-        favoritos.delete(catId);
+// =========================
+//   TEMA OSCURO
+// =========================
+function loadTheme() {
+    const stored = localStorage.getItem("gatoHubTheme");
+    if (stored === "dark") {
+        document.documentElement.classList.add("dark");
+        themeToggle.textContent = "☀️ Modo claro";
     } else {
-        favoritos.add(catId);
+        document.documentElement.classList.remove("dark");
+        themeToggle.textContent = "🌙 Modo oscuro";
     }
-    saveFavoritos();
-    renderCats(filteredCats);
-    updateStats();
 }
 
-// PAGINACIÓN
-function updatePagination(totalPages) {
-    if (totalPages === 0) {
-        pageInfo.textContent = "Página 0 / 0";
-        prevPageBtn.disabled = true;
-        nextPageBtn.disabled = true;
-        return;
-    }
-    pageInfo.textContent = `Página ${currentPage} / ${totalPages}`;
-    prevPageBtn.disabled = currentPage === 1;
-    nextPageBtn.disabled = currentPage === totalPages;
+function toggleTheme() {
+    const isDark = document.documentElement.classList.toggle("dark");
+    localStorage.setItem("gatoHubTheme", isDark ? "dark" : "light");
+    themeToggle.textContent = isDark ? "☀️ Modo claro" : "🌙 Modo oscuro";
 }
 
-// ESTADÍSTICAS
-function updateStats() {
-    statTotalGatos.textContent = cats.length;
-    statFavoritos.textContent = favoritos.size;
-}
-
-// SCROLL A SECCIÓN
+// =========================
+//   SCROLL Y BOTÓN TOP
+// =========================
 function scrollToSection(id) {
     const el = document.getElementById(id);
     if (!el) return;
     el.scrollIntoView({ behavior: "smooth" });
 }
 
-// TEMA OSCURO
-function toggleTheme() {
-    document.body.classList.toggle("dark-theme");
-    const isDark = document.body.classList.contains("dark-theme");
-    themeToggle.textContent = isDark ? "☀️ Modo claro" : "🌙 Modo oscuro";
-    localStorage.setItem("gatoHubTheme", isDark ? "dark" : "light");
-}
-
-function loadTheme() {
-    const stored = localStorage.getItem("gatoHubTheme");
-    if (stored === "dark") {
-        document.body.classList.add("dark-theme");
-        themeToggle.textContent = "☀️ Modo claro";
-    }
-}
-
-// BOTÓN VOLVER ARRIBA
-function handleScrollTopButton() {
+function handleScroll() {
     if (window.scrollY > 300) {
-        backToTopBtn.classList.add("show");
+        backToTopBtn.classList.add("visible");
     } else {
-        backToTopBtn.classList.remove("show");
+        backToTopBtn.classList.remove("visible");
     }
 }
 
-// FORMULARIOS
-function setupAdoptionForm() {
-    if (!adoptionForm) return;
-    adoptionForm.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const formData = new FormData(adoptionForm);
-        try {
-            await fetch(adoptionForm.action, {
-                method: "POST",
-                body: formData,
-                headers: { Accept: "application/json" }
-            });
-            adoptionForm.reset();
-            alert("Solicitud de adopción enviada correctamente.");
-        } catch (err) {
-            alert("Ha ocurrido un error al enviar el formulario de adopción.");
-        }
-    });
+// =========================
+//   VALIDACIONES FORMULARIOS
+// =========================
+function validateDonationCardNumber(num) {
+    const clean = num.replace(/\s+/g, "");
+    return /^\d{16}$/.test(clean);
 }
 
-// REGISTRO / LOGIN
-function setupRegisterForm() {
-    if (!registerForm) return;
-    registerForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const nombre = document.getElementById("regNombre").value.trim();
-        const email = document.getElementById("regEmail").value.trim().toLowerCase();
-        const password = document.getElementById("regPassword").value;
-
-        if (!nombre || !email || !password) {
-            alert("Rellena todos los campos para registrarte.");
-            return;
-        }
-
-        const exists = users.some(u => u.email === email);
-        if (exists) {
-            alert("Ya existe una cuenta registrada con ese correo.");
-            return;
-        }
-
-        users.push({ nombre, email, password });
-        saveUsers();
-        registerForm.reset();
-        alert("Cuenta creada correctamente. Ahora puedes iniciar sesión.");
-    });
+// Fecha formato MM/YY, con MM entre 01 y 12 y YY entre 00 y 99
+function validateDonationExpiry(value) {
+    const match = /^(\d{2})\/(\d{2})$/.exec(value);
+    if (!match) return false;
+    const mm = parseInt(match[1], 10);
+    const yy = parseInt(match[2], 10);
+    if (mm < 1 || mm > 12) return false;
+    if (yy < 0 || yy > 99) return false;
+    return true;
 }
 
-function setupLoginForm() {
-    if (!loginForm) return;
-    loginForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const email = document.getElementById("loginEmail").value.trim().toLowerCase();
-        const password = document.getElementById("loginPassword").value;
-
-        const user = users.find(u => u.email === email && u.password === password);
-        if (!user) {
-            alert("Correo o contraseña incorrectos, o la cuenta no existe.");
-            return;
-        }
-
-        loginForm.reset();
-        alert(`Bienvenido, ${user.nombre}. Has iniciado sesión correctamente.`);
-    });
+function validateDonationCvv(value) {
+    return /^\d{3}$/.test(value);
 }
 
-// DONACIONES
-function setupDonationForm() {
-    if (!donationForm) return;
-    donationForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const numero = document.getElementById("donNumero").value.replace(/\s+/g, "");
-        const fecha = document.getElementById("donFecha").value.trim();
-        const cvv = document.getElementById("donCvv").value.trim();
-        const cantidad = document.getElementById("donCantidad").value;
-
-        if (!/^[0-9]{13,16}$/.test(numero)) {
-            alert("Introduce un número de tarjeta válido (13 a 16 dígitos).");
-            return;
-        }
-
-        const fechaRegex = /^(0[1-9]|1[0-2])\/([0-9]{2})$/;
-        if (!fechaRegex.test(fecha)) {
-            alert("Introduce una fecha de caducidad válida en formato MM/YY (ej: 01/30).");
-            return;
-        }
-
-        if (!/^[0-9]{3}$/.test(cvv)) {
-            alert("Introduce un CVV válido de 3 dígitos.");
-            return;
-        }
-
-        if (!cantidad || Number(cantidad) <= 0) {
-            alert("Introduce una cantidad válida en euros.");
-            return;
-        }
-
-        donationForm.reset();
-        alert("Donación procesada correctamente.");
-    });
-
-    const donNumero = document.getElementById("donNumero");
-    donNumero.addEventListener("input", () => {
-        donNumero.value = donNumero.value.replace(/\D/g, "").slice(0, 16);
-    });
-
-    const donCvv = document.getElementById("donCvv");
-    donCvv.addEventListener("input", () => {
-        donCvv.value = donCvv.value.replace(/\D/g, "").slice(0, 3);
-    });
-}
-
-// EVENTOS
+// =========================
+//   EVENTOS
+// =========================
 document.addEventListener("DOMContentLoaded", () => {
     loadFavoritos();
     loadUsers();
-    loadTheme();
     setRandomHeroImage();
     filteredCats = [...cats];
     renderCats(filteredCats);
     updateStats();
+    loadTheme();
 
     // Filtros
     searchInput.addEventListener("input", applyFilters);
@@ -525,33 +482,119 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Modal
     closeModalBtn.addEventListener("click", closeCatModal);
-    modal.addEventListener("click", (e) => {
+    modal.addEventListener("click", e => {
         if (e.target === modal) closeCatModal();
     });
 
     modalFavBtn.addEventListener("click", () => {
-        if (!currentModalCatId) return;
+        if (currentModalCatId == null) return;
         toggleFavorite(currentModalCatId);
-        modalFavBtn.textContent = favoritos.has(currentModalCatId)
-            ? "❤️ En favoritos"
-            : "❤️ Añadir a favoritos";
     });
 
     modalAdoptBtn.addEventListener("click", () => {
-        closeCatModal();
         scrollToSection("adopcion");
+        closeCatModal();
     });
 
     // Tema
     themeToggle.addEventListener("click", toggleTheme);
 
-    // Volver arriba
-    window.addEventListener("scroll", handleScrollTopButton);
-    backToTopBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+    // Back to top
+    window.addEventListener("scroll", handleScroll);
+    backToTopBtn.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    });
 
-    // Formularios
-    setupAdoptionForm();
-    setupRegisterForm();
-    setupLoginForm();
-    setupDonationForm();
+    // Formulario adopción
+    if (adoptionForm) {
+        adoptionForm.addEventListener("submit", e => {
+            e.preventDefault();
+            alert("Solicitud de adopción enviada correctamente.");
+            adoptionForm.reset();
+        });
+    }
+
+    // Registro
+    if (registerForm) {
+        registerForm.addEventListener("submit", e => {
+            e.preventDefault();
+            const nombre = document.getElementById("regNombre").value.trim();
+            const email = document.getElementById("regEmail").value.trim();
+            const password = document.getElementById("regPassword").value;
+
+            if (!nombre || !email || !password) {
+                alert("Por favor, completa todos los campos de registro.");
+                return;
+            }
+
+            if (users.some(u => u.email === email)) {
+                alert("Ya existe un usuario registrado con ese email.");
+                return;
+            }
+
+            users.push({ nombre, email, password });
+            saveUsers();
+            alert("Registro completado correctamente.");
+            registerForm.reset();
+        });
+    }
+
+    // Login
+    if (loginForm) {
+        loginForm.addEventListener("submit", e => {
+            e.preventDefault();
+            const email = document.getElementById("loginEmail").value.trim();
+            const password = document.getElementById("loginPassword").value;
+
+            const user = users.find(u => u.email === email && u.password === password);
+            if (!user) {
+                alert("Credenciales incorrectas.");
+                return;
+            }
+
+            alert(`Bienvenido, ${user.nombre}.`);
+            loginForm.reset();
+        });
+    }
+
+    // Donaciones
+    if (donationForm) {
+        donationForm.addEventListener("submit", e => {
+            e.preventDefault();
+            const nombre = document.getElementById("donNombre").value.trim();
+            const email = document.getElementById("donEmail").value.trim();
+            const numero = document.getElementById("donNumero").value.trim();
+            const fecha = document.getElementById("donFecha").value.trim();
+            const cvv = document.getElementById("donCvv").value.trim();
+            const cantidad = document.getElementById("donCantidad").value;
+
+            if (!nombre || !email || !numero || !fecha || !cvv || !cantidad) {
+                alert("Por favor, completa todos los campos de donación.");
+                return;
+            }
+
+            if (!validateDonationCardNumber(numero)) {
+                alert("Número de tarjeta no válido. Debe tener 16 dígitos.");
+                return;
+            }
+
+            if (!validateDonationExpiry(fecha)) {
+                alert("Fecha de caducidad no válida. Usa el formato MM/YY con mes entre 01 y 12.");
+                return;
+            }
+
+            if (!validateDonationCvv(cvv)) {
+                alert("CVV no válido. Debe tener exactamente 3 dígitos.");
+                return;
+            }
+
+            if (Number(cantidad) <= 0) {
+                alert("La cantidad debe ser mayor que 0.");
+                return;
+            }
+
+            alert("Donación procesada correctamente. Gracias por tu ayuda.");
+            donationForm.reset();
+        });
+    }
 });
