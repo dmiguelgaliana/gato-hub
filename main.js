@@ -8,7 +8,7 @@
    ========================= */
 const SUPABASE_URL = "https://dyygzezjynylhqiglvry.supabase.co";
 // ⚠️ PEGA AQUÍ TU ANON KEY (NO LA COMPARTAS)
-const SUPABASE_KEY = "TU_SUPABASE_ANON_KEY_AQUI";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR5eWd6ZXpqeW55bGhxaWdsdnJ5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkxNjc2NjcsImV4cCI6MjA4NDc0MzY2N30.jnIi6T9dgwsxttGOmcQyh8mbmm0ex3Z_zPFvOBWY7EY";
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
