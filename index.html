@@ -25,32 +25,40 @@
             <a href="#donaciones">Donaciones</a>
         </nav>
 
-        <button id="themeToggle" class="theme-toggle">🌙 Modo oscuro</button>
+        <div class="header-controls">
+            <select id="languageSelect" class="language-select">
+                <option value="es">Español</option>
+                <option value="ca">Català</option>
+                <option value="en">English</option>
+            </select>
+
+            <button id="themeToggle" class="theme-toggle">🌙 Modo oscuro</button>
+        </div>
     </header>
 
     <!-- HERO -->
     <section class="hero">
         <div class="hero-text">
-            <h2>Bienvenido a GatoHub</h2>
-            <p>Explora la galería, guarda favoritos, descubre historias y ayuda a gatos reales.</p>
+            <h2 id="heroTitle">Bienvenido a GatoHub</h2>
+            <p id="heroSubtitle">Explora la galería, guarda favoritos y descubre historias únicas.</p>
 
             <div class="hero-actions">
-                <button class="primary-btn" onclick="scrollToSection('galeria')">Ver galería</button>
-                <button class="secondary-btn" onclick="scrollToSection('gifs')">Ver gifs</button>
+                <button class="primary-btn" onclick="scrollToSection('galeria')" id="btnVerGaleria">Ver galería</button>
+                <button class="secondary-btn" onclick="scrollToSection('gifs')" id="btnVerGifs">Ver gifs</button>
             </div>
 
             <div class="stats-bar">
                 <div class="stat-item">
                     <span id="statTotalGatos">20</span>
-                    <small>Gatos</small>
+                    <small id="statGatosLabel">Gatos</small>
                 </div>
                 <div class="stat-item">
                     <span id="statFavoritos">0</span>
-                    <small>Favoritos</small>
+                    <small id="statFavoritosLabel">Favoritos</small>
                 </div>
                 <div class="stat-item">
                     <span>∞</span>
-                    <small>Ronroneos</small>
+                    <small id="statRonroneosLabel">Ronroneos</small>
                 </div>
             </div>
         </div>
@@ -66,26 +74,29 @@
     <!-- GALERÍA -->
     <section id="galeria" class="gallery-section">
         <header class="section-header">
-            <h2>Galería de gatos</h2>
-            <p>Filtra, busca y descubre a cada uno.</p>
+            <h2 id="galeriaTitle">Galería de gatos</h2>
+            <p id="galeriaSubtitle">Filtra, busca y descubre a cada uno.</p>
         </header>
 
         <div class="filters">
-            <input type="text" id="searchInput" placeholder="Buscar por nombre...">
+            <input type="text" id="searchInput" placeholder="Buscar por nombre..." data-es="Buscar por nombre..." data-ca="Cercar per nom..." data-en="Search by name...">
+
             <select id="filterRaza">
-                <option value="todos">Todas las razas</option>
+                <option value="todos" data-es="Todas las razas" data-ca="Totes les races" data-en="All breeds">Todas las razas</option>
                 <option value="siames">Siamés</option>
                 <option value="persa">Persa</option>
                 <option value="comun">Común europeo</option>
                 <option value="bengali">Bengalí</option>
                 <option value="otra">Otras</option>
             </select>
+
             <select id="filterEdad">
                 <option value="todas">Todas las edades</option>
                 <option value="cachorro">Cachorros</option>
                 <option value="adulto">Adultos</option>
                 <option value="senior">Senior</option>
             </select>
+
             <button id="filterFavoritos" class="chip-btn">Solo favoritos</button>
             <button id="clearFilters" class="chip-btn">Limpiar</button>
         </div>
@@ -116,17 +127,17 @@
                         <span id="modalBreed"></span> · <span id="modalAge"></span>
                     </p>
 
-                    <p class="modal-section-title">Historia</p>
+                    <p class="modal-section-title" id="modalHistoriaTitle">Historia</p>
                     <p id="modalHistoria"></p>
 
-                    <p class="modal-section-title">Personalidad</p>
+                    <p class="modal-section-title" id="modalPersonalidadTitle">Personalidad</p>
                     <p id="modalPersonalidad"></p>
 
-                    <p class="modal-section-title">Detalles</p>
+                    <p class="modal-section-title" id="modalDetallesTitle">Detalles</p>
                     <ul class="modal-details-list">
-                        <li><strong>Color:</strong> <span id="modalColor"></span></li>
-                        <li><strong>Peso:</strong> <span id="modalPeso"></span></li>
-                        <li><strong>Energía:</strong> <span id="modalEnergia"></span></li>
+                        <li><strong id="colorLabel">Color:</strong> <span id="modalColor"></span></li>
+                        <li><strong id="pesoLabel">Peso:</strong> <span id="modalPeso"></span></li>
+                        <li><strong id="energiaLabel">Energía:</strong> <span id="modalEnergia"></span></li>
                     </ul>
 
                     <div id="modalTags" class="modal-tags"></div>
@@ -143,7 +154,7 @@
     <!-- GIFS -->
     <section id="gifs" class="gifs-section">
         <header class="section-header">
-            <h2>Gifs de gatos</h2>
+            <h2 id="gifsTitle">Gifs de gatos</h2>
         </header>
 
         <div class="gifs-grid">
@@ -156,7 +167,7 @@
     <!-- CURIOSIDADES -->
     <section id="curiosidades" class="facts-section">
         <header class="section-header">
-            <h2>Curiosidades</h2>
+            <h2 id="curiosidadesTitle">Curiosidades</h2>
         </header>
 
         <div class="facts-grid">
@@ -185,7 +196,7 @@
     <!-- CONSEJOS -->
     <section id="consejos" class="tips-section">
         <header class="section-header">
-            <h2>Consejos</h2>
+            <h2 id="consejosTitle">Consejos</h2>
         </header>
 
         <div class="tips-grid">
@@ -230,82 +241,82 @@
     <!-- ADOPCIÓN -->
     <section id="adopcion" class="adoption-section">
         <header class="section-header">
-            <h2>Formulario de adopción</h2>
+            <h2 id="adopcionTitle">Formulario de adopción</h2>
         </header>
 
         <form class="adoption-form">
             <div class="form-group">
-                <label>Nombre completo</label>
+                <label id="labelNombre">Nombre completo</label>
                 <input type="text" required>
             </div>
 
             <div class="form-group">
-                <label>Correo electrónico</label>
+                <label id="labelEmail">Correo electrónico</label>
                 <input type="email" required>
             </div>
 
             <div class="form-group">
-                <label>Teléfono</label>
+                <label id="labelTelefono">Teléfono</label>
                 <input type="tel" required>
             </div>
 
             <div class="form-group">
-                <label>Gato de interés</label>
+                <label id="labelGatoInteres">Gato de interés</label>
                 <input type="text" required>
             </div>
 
             <div class="form-group">
-                <label>Cuéntanos sobre tu hogar</label>
+                <label id="labelMensaje">Cuéntanos sobre tu hogar</label>
                 <textarea rows="4" required></textarea>
             </div>
 
-            <button class="primary-btn">Enviar solicitud</button>
+            <button class="primary-btn" id="btnEnviarAdopcion">Enviar solicitud</button>
         </form>
     </section>
 
     <!-- LOGIN -->
     <section id="login" class="login-section">
         <header class="section-header">
-            <h2>Acceso</h2>
+            <h2 id="loginTitle">Acceso</h2>
         </header>
 
         <div class="login-forms-wrapper">
             <div class="login-form-block">
-                <h3>Crear cuenta</h3>
+                <h3 id="crearCuentaTitle">Crear cuenta</h3>
                 <form id="registerForm" class="login-form">
                     <div class="form-group">
-                        <label>Usuario</label>
+                        <label id="labelUsuario">Usuario</label>
                         <input type="text" id="regNombre" required>
                     </div>
 
                     <div class="form-group">
-                        <label>Email</label>
+                        <label id="labelEmailRegistro">Email</label>
                         <input type="email" id="regEmail" required>
                     </div>
 
                     <div class="form-group">
-                        <label>Contraseña</label>
+                        <label id="labelPasswordRegistro">Contraseña</label>
                         <input type="password" id="regPassword" required>
                     </div>
 
-                    <button class="primary-btn">Registrarse</button>
+                    <button class="primary-btn" id="btnRegistrarse">Registrarse</button>
                 </form>
             </div>
 
             <div class="login-form-block">
-                <h3>Iniciar sesión</h3>
+                <h3 id="iniciarSesionTitle">Iniciar sesión</h3>
                 <form id="loginForm" class="login-form">
                     <div class="form-group">
-                        <label>Email</label>
+                        <label id="labelEmailLogin">Email</label>
                         <input type="email" id="loginEmail" required>
                     </div>
 
                     <div class="form-group">
-                        <label>Contraseña</label>
+                        <label id="labelPasswordLogin">Contraseña</label>
                         <input type="password" id="loginPassword" required>
                     </div>
 
-                    <button class="secondary-btn">Entrar</button>
+                    <button class="secondary-btn" id="btnEntrar">Entrar</button>
                 </form>
             </div>
         </div>
@@ -314,49 +325,49 @@
     <!-- DONACIONES -->
     <section id="donaciones" class="donation-section">
         <header class="section-header">
-            <h2>Donaciones</h2>
+            <h2 id="donacionesTitle">Donaciones</h2>
         </header>
 
         <form id="donationForm" class="donation-form">
             <div class="form-group">
-                <label>Titular</label>
+                <label id="labelTitular">Titular</label>
                 <input type="text" id="donNombre" required>
             </div>
 
             <div class="form-group">
-                <label>Email</label>
+                <label id="labelEmailDonacion">Email</label>
                 <input type="email" id="donEmail" required>
             </div>
 
             <div class="form-group">
-                <label>Número de tarjeta</label>
+                <label id="labelNumeroTarjeta">Número de tarjeta</label>
                 <input type="text" id="donNumero" maxlength="16" required>
             </div>
 
             <div class="form-row">
                 <div class="form-group">
-                    <label>Caducidad (MM/YY)</label>
+                    <label id="labelCaducidad">Caducidad (MM/YY)</label>
                     <input type="text" id="donFecha" required>
                 </div>
 
                 <div class="form-group">
-                    <label>CVV</label>
+                    <label id="labelCVV">CVV</label>
                     <input type="password" id="donCvv" maxlength="3" required>
                 </div>
             </div>
 
             <div class="form-group">
-                <label>Cantidad (€)</label>
+                <label id="labelCantidad">Cantidad (€)</label>
                 <input type="number" id="donCantidad" min="1" required>
             </div>
 
-            <button class="primary-btn">Donar</button>
+            <button class="primary-btn" id="btnDonar">Donar</button>
         </form>
     </section>
 
     <!-- FOOTER -->
     <footer class="main-footer">
-        <p>GatoHub · 2026</p>
+        <p id="footerText">GatoHub · 2026</p>
     </footer>
 
     <button id="backToTop" class="back-to-top">↑</button>
