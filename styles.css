@@ -44,7 +44,7 @@ body {
     min-height: 100vh;
 }
 
-/* CONTENEDOR GENERAL: ancho completo pero con padding lateral */
+/* CONTENEDOR GENERAL */
 .site-header,
 main,
 .site-footer {
@@ -135,6 +135,11 @@ main,
     background: rgba(15, 23, 42, 0.7);
     border-color: #e5e7eb;
     transform: translateY(-1px);
+}
+
+.pill-button.active {
+    background: rgba(129, 140, 248, 0.8);
+    border-color: #e5e7eb;
 }
 
 .pill-select {
