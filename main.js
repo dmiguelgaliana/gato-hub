@@ -1,13 +1,13 @@
 /* ============================================================
    GatoHub - main.js
-   Modo oscuro + idiomas + filtros + modal + Supabase auth
+   Modo oscuro + idiomas + filtros + modal + Supabase auth + Google
    ============================================================ */
 
 /* =========================
    CONFIGURACIÓN SUPABASE
    ========================= */
 const SUPABASE_URL = "https://dyygzezjynylhqiglvry.supabase.co";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR5eWd6ZXpqeW55bGhxaWdsdnJ5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkxNjc2NjcsImV4cCI6MjA4NDc0MzY2N30.jnIi6T9dgwsxttGOmcQyh8mbmm0ex3Z_zPFvOBWY7EY";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR5eWd6ZXpqeW55bGhxaWdsdnJ5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkxNjc2NjcsImV4cCI6MjA4NDc0MzY2N30.jnIi6T9dgwsxttGOmcQyh8mbmm0ex3Z_zPFvOBWY7EY"; // pega aquí tu anon key
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 /* =========================
@@ -53,7 +53,7 @@ const i18nCats = {
         10: { edad: "4 años", historia: "Toby fue encontrado en un garaje.", personalidad: "Cariñoso, le encanta frotarse contra las piernas.", energia: "Media", tags: ["Cariñoso", "Agradecido", "Ideal primer gato"] },
         11: { edad: "7 meses", historia: "Lola fue la más pequeña de su camada.", personalidad: "Juguetona, dulce, algo dependiente.", energia: "Alta", tags: ["Cachorra", "Juguetona", "Necesita atención"] },
         12: { edad: "3 años", historia: "Rocky vivía en una casa con jardín.", personalidad: "Muy activo, curioso, algo travieso.", energia: "Muy alta", tags: ["Activo", "Necesita espacio", "Juguetón"] },
-        13: { edad: "2 años", historia: "Sombra se movía entre tejados como un ninja.", personalidad: "Independiente, observador, algo tímido.", energia: "Media", tags: ["Independiente", "Elegante", "Ideal personas tranquilas"] },
+        13: { edad: "2 años", historia: "Sombra se movía entre tejados como un ninja.", personalidad: "Independiente, observador, algo tímido.", energia: "Media", tags: ["Independent", "Elegante", "Ideal personas tranquilas"] },
         14: { edad: "11 años", historia: "Nube busca su retiro definitivo.", personalidad: "Muy calmado, le encantan las siestas largas.", energia: "Baja", tags: ["Senior", "Muy tranquilo", "Ideal compañía"] },
         15: { edad: "5 meses", historia: "Pixel no para quieto.", personalidad: "Hiperactivo, curioso, muy vocal.", energia: "Muy alta", tags: ["Cachorro", "Muy activo", "Necesita juego"] },
         16: { edad: "3 años", historia: "Chispa apareció en un taller mecánico.", personalidad: "Curioso, juguetón, algo travieso.", energia: "Alta", tags: ["Curioso", "Explorador", "Juguetón"] },
@@ -370,6 +370,15 @@ const donationForm = document.getElementById("donationForm");
 const curiosidadesListEl = document.getElementById("curiosidadesList");
 const consejosListEl = document.getElementById("consejosList");
 
+const btnVerGaleria = document.getElementById("btnVerGaleria");
+const btnVerGifs = document.getElementById("btnVerGifs");
+
+const btnLoginTop = document.getElementById("btnLoginTop");
+const btnRegisterTop = document.getElementById("btnRegisterTop");
+const btnGoogleTop = document.getElementById("btnGoogleTop");
+const logoutBtn = document.getElementById("logoutBtn");
+const userInfo = document.getElementById("userInfo");
+
 /* =========================
    ESTADO
    ========================= */
@@ -411,6 +420,36 @@ function scrollToSection(id) {
     const el = document.getElementById(id);
     if (!el) return;
     el.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+/* =========================
+   FORMATEAR RAZA
+   ========================= */
+function formatearRaza(raza, lang) {
+    const mapEs = {
+        siames: "Siamés",
+        persa: "Persa",
+        comun: "Común europeo",
+        bengali: "Bengalí",
+        otra: "Otra raza"
+    };
+    const mapCa = {
+        siames: "Siamès",
+        persa: "Persa",
+        comun: "Comú europeu",
+        bengali: "Bengalí",
+        otra: "Una altra raça"
+    };
+    const mapEn = {
+        siames: "Siamese",
+        persa: "Persian",
+        comun: "European shorthair",
+        bengali: "Bengal",
+        otra: "Other breed"
+    };
+    if (lang === "ca") return mapCa[raza] || raza;
+    if (lang === "en") return mapEn[raza] || raza;
+    return mapEs[raza] || raza;
 }
 
 /* =========================
@@ -487,36 +526,6 @@ function renderCats() {
 
     updatePagination();
     updateStats();
-}
-
-/* =========================
-   FORMATEAR RAZA
-   ========================= */
-function formatearRaza(raza, lang) {
-    const mapEs = {
-        siames: "Siamés",
-        persa: "Persa",
-        comun: "Común europeo",
-        bengali: "Bengalí",
-        otra: "Otra raza"
-    };
-    const mapCa = {
-        siames: "Siamès",
-        persa: "Persa",
-        comun: "Comú europeu",
-        bengali: "Bengalí",
-        otra: "Una altra raça"
-    };
-    const mapEn = {
-        siames: "Siamese",
-        persa: "Persian",
-        comun: "European shorthair",
-        bengali: "Bengal",
-        otra: "Other breed"
-    };
-    if (lang === "ca") return mapCa[raza] || raza;
-    if (lang === "en") return mapEn[raza] || raza;
-    return mapEs[raza] || raza;
 }
 
 /* =========================
@@ -605,8 +614,8 @@ function applyLanguage() {
     document.getElementById("heroTitle").textContent = t.heroTitle;
     document.getElementById("heroSubtitle").textContent = t.heroSubtitle;
 
-    document.getElementById("btnVerGaleria").textContent = t.btnVerGaleria;
-    document.getElementById("btnVerGifs").textContent = t.btnVerGifs;
+    btnVerGaleria.textContent = t.btnVerGaleria;
+    btnVerGifs.textContent = t.btnVerGifs;
 
     document.getElementById("statGatosLabel").textContent = t.statGatosLabel;
     document.getElementById("statFavoritosLabel").textContent = t.statFavoritosLabel;
@@ -706,6 +715,26 @@ function toggleDarkMode() {
 /* =========================
    SUPABASE AUTH
    ========================= */
+async function initSessionUI() {
+    const { data } = await sb.auth.getSession();
+    const user = data.session?.user || null;
+
+    if (user) {
+        const nombre = user.user_metadata?.nombre || user.email;
+        if (userInfo) userInfo.textContent = `Hola, ${nombre}`;
+        if (logoutBtn) logoutBtn.style.display = "inline-flex";
+        if (btnLoginTop) btnLoginTop.style.display = "none";
+        if (btnRegisterTop) btnRegisterTop.style.display = "none";
+        if (btnGoogleTop) btnGoogleTop.style.display = "none";
+    } else {
+        if (userInfo) userInfo.textContent = "";
+        if (logoutBtn) logoutBtn.style.display = "none";
+        if (btnLoginTop) btnLoginTop.style.display = "inline-flex";
+        if (btnRegisterTop) btnRegisterTop.style.display = "inline-flex";
+        if (btnGoogleTop) btnGoogleTop.style.display = "inline-flex";
+    }
+}
+
 async function setupAuthForms() {
     if (registerForm) {
         registerForm.addEventListener("submit", async e => {
@@ -724,7 +753,8 @@ async function setupAuthForms() {
                     email,
                     password,
                     options: {
-                        data: { nombre }
+                        data: { nombre },
+                        emailRedirectTo: window.location.origin
                     }
                 });
 
@@ -735,6 +765,7 @@ async function setupAuthForms() {
 
                 alert("Cuenta creada correctamente. Revisa tu correo para confirmar.");
                 registerForm.reset();
+                initSessionUI();
             } catch (err) {
                 console.error(err);
                 alert("Error del servidor. Inténtalo de nuevo más tarde.");
@@ -760,18 +791,45 @@ async function setupAuthForms() {
                 });
 
                 if (error) {
-                    alert("Credenciales incorrectas.");
+                    alert("Credenciales incorrectas o email no verificado.");
                     return;
                 }
 
                 const nombre = data.user.user_metadata?.nombre || data.user.email;
                 alert(`Bienvenido/a, ${nombre}.`);
                 loginForm.reset();
+                initSessionUI();
             } catch (err) {
                 console.error(err);
                 alert("Error del servidor. Inténtalo de nuevo más tarde.");
             }
         });
+    }
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", async () => {
+            await sb.auth.signOut();
+            alert("Sesión cerrada.");
+            initSessionUI();
+        });
+    }
+}
+
+async function handleGoogleLogin() {
+    try {
+        const { error } = await sb.auth.signInWithOAuth({
+            provider: "google",
+            options: {
+                redirectTo: window.location.origin
+            }
+        });
+        if (error) {
+            alert("Error al iniciar sesión con Google");
+            console.error(error);
+        }
+    } catch (err) {
+        console.error(err);
+        alert("Error inesperado con Google");
     }
 }
 
@@ -859,7 +917,6 @@ function setupModalEvents() {
             if (cardFavIcon) {
                 toggleFavorite(currentModalCatId, cardFavIcon);
             } else {
-                // por si acaso
                 if (favoritos.has(currentModalCatId)) favoritos.delete(currentModalCatId);
                 else favoritos.add(currentModalCatId);
                 saveFavoritos();
@@ -888,6 +945,7 @@ function setupLanguageSelector() {
         currentLang = languageSelect.value;
         localStorage.setItem("gatoHubLang", currentLang);
         applyLanguage();
+        initSessionUI();
     });
 }
 
@@ -928,6 +986,27 @@ function setupForms() {
     }
 }
 
+function setupHeroButtons() {
+    if (btnVerGaleria) {
+        btnVerGaleria.addEventListener("click", () => scrollToSection("galeria"));
+    }
+    if (btnVerGifs) {
+        btnVerGifs.addEventListener("click", () => scrollToSection("gifs"));
+    }
+}
+
+function setupTopAuthButtons() {
+    if (btnLoginTop) {
+        btnLoginTop.addEventListener("click", () => scrollToSection("login"));
+    }
+    if (btnRegisterTop) {
+        btnRegisterTop.addEventListener("click", () => scrollToSection("login"));
+    }
+    if (btnGoogleTop) {
+        btnGoogleTop.addEventListener("click", handleGoogleLogin);
+    }
+}
+
 /* =========================
    INICIO
    ========================= */
@@ -942,5 +1021,8 @@ document.addEventListener("DOMContentLoaded", () => {
     setupThemeToggle();
     setupBackToTop();
     setupForms();
+    setupHeroButtons();
+    setupTopAuthButtons();
     setupAuthForms();
+    initSessionUI();
 });
