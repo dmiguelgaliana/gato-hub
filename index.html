@@ -7,9 +7,7 @@
   <link rel="stylesheet" href="styles.css" />
   <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 </head>
-
 <body>
-  <!-- HEADER -->
   <header class="site-header">
     <div class="header-inner">
       <div class="logo-area">
@@ -22,6 +20,7 @@
         <a href="#curiosidades" id="navCuriosidades">Curiosidades</a>
         <a href="#consejos" id="navConsejos">Consejos</a>
         <a href="#adopcion" id="navAdopcion">Adopción</a>
+        <a href="#login" id="navLogin">Login</a>
         <a href="#donaciones" id="navDonaciones">Donaciones</a>
       </nav>
 
@@ -40,13 +39,12 @@
         <button id="btnRegisterTop" class="pill-button">Crear cuenta</button>
         <button id="btnGoogleTop" class="pill-button">Google</button>
 
-        <span id="userInfo" class="user-info"></span>
+        <span id="userInfo" style="font-size:0.8rem;opacity:0.8;"></span>
         <button id="logoutBtn" class="pill-button" style="display:none;">Cerrar sesión</button>
       </div>
     </div>
   </header>
 
-  <!-- HERO -->
   <main>
     <section class="hero">
       <div class="hero-content">
@@ -79,7 +77,6 @@
       </div>
     </section>
 
-    <!-- GALERÍA -->
     <section id="galeria" class="section">
       <div class="section-header">
         <h2 id="galeriaTitle">Galería de gatos</h2>
@@ -115,165 +112,194 @@
       </div>
     </section>
 
-    <!-- GIFS -->
     <section id="gifs" class="section">
       <div class="section-header">
         <h2 id="gifsTitle">Gifs de gatos</h2>
+        <p>Un poco de caos felino animado.</p>
       </div>
       <div class="gifs-grid">
-        <img src="assets/gifs/gif1.gif" class="cat-gif" />
-        <img src="assets/gifs/gif2.gif" class="cat-gif" />
-        <img src="assets/gifs/gif3.gif" class="cat-gif" />
+        <img src="assets/gifs/gif1.gif" alt="Gif gato 1" class="cat-gif" />
+        <img src="assets/gifs/gif2.gif" alt="Gif gato 2" class="cat-gif" />
+        <img src="assets/gifs/gif3.gif" alt="Gif gato 3" class="cat-gif" />
       </div>
     </section>
 
-    <!-- CURIOSIDADES -->
     <section id="curiosidades" class="section">
       <div class="section-header">
         <h2 id="curiosidadesTitle">Curiosidades</h2>
+        <p>Datos curiosos sobre gatos.</p>
       </div>
       <ul id="curiosidadesList" class="info-list"></ul>
     </section>
 
-    <!-- CONSEJOS -->
     <section id="consejos" class="section">
       <div class="section-header">
         <h2 id="consejosTitle">Consejos</h2>
+        <p>Cuida mejor de tu compañero felino.</p>
       </div>
       <ul id="consejosList" class="info-list"></ul>
     </section>
 
-    <!-- ADOPCIÓN -->
     <section id="adopcion" class="section">
       <div class="section-header">
         <h2 id="adopcionTitle">Formulario de adopción</h2>
+        <p>Cuéntanos sobre ti y tu hogar.</p>
       </div>
 
       <form class="adoption-form">
         <div class="form-group">
-          <label id="labelNombre">Nombre completo</label>
+          <label id="labelNombre" for="adopNombre">Nombre completo</label>
           <input id="adopNombre" type="text" required />
         </div>
-
         <div class="form-group">
-          <label id="labelEmail">Correo electrónico</label>
+          <label id="labelEmail" for="adopEmail">Correo electrónico</label>
           <input id="adopEmail" type="email" required />
         </div>
-
         <div class="form-group">
-          <label id="labelTelefono">Teléfono</label>
+          <label id="labelTelefono" for="adopTelefono">Teléfono</label>
           <input id="adopTelefono" type="tel" />
         </div>
-
         <div class="form-group">
-          <label id="labelGatoInteres">Gato de interés</label>
+          <label id="labelGatoInteres" for="adopGato">Gato de interés</label>
           <input id="adopGato" type="text" />
         </div>
-
         <div class="form-group">
-          <label id="labelMensaje">Cuéntanos sobre tu hogar</label>
+          <label id="labelMensaje" for="adopMensaje">Cuéntanos sobre tu hogar</label>
           <textarea id="adopMensaje" rows="4"></textarea>
         </div>
-
-        <button id="btnEnviarAdopcion" class="primary-button">Enviar solicitud</button>
+        <button id="btnEnviarAdopcion" class="primary-button" type="submit">Enviar solicitud</button>
       </form>
     </section>
 
-    <!-- DONACIONES -->
+    <section id="login" class="section">
+      <div class="section-header">
+        <h2 id="loginTitle">Acceso</h2>
+        <p>Inicia sesión o crea tu cuenta.</p>
+      </div>
+
+      <div class="forms-grid">
+        <div class="card">
+          <h3 id="crearCuentaTitle">Crear cuenta</h3>
+          <form id="registerForm">
+            <div class="form-group">
+              <label id="labelUsuario" for="regNombre">Usuario</label>
+              <input id="regNombre" type="text" required />
+            </div>
+            <div class="form-group">
+              <label id="labelEmailRegistro" for="regEmail">Email</label>
+              <input id="regEmail" type="email" required />
+            </div>
+            <div class="form-group">
+              <label id="labelPasswordRegistro" for="regPassword">Contraseña</label>
+              <input id="regPassword" type="password" required />
+            </div>
+            <button id="btnRegistrarse" class="primary-button" type="submit">Registrarse</button>
+          </form>
+        </div>
+
+        <div class="card">
+          <h3 id="iniciarSesionTitle">Iniciar sesión</h3>
+          <form id="loginForm">
+            <div class="form-group">
+              <label id="labelEmailLogin" for="loginEmail">Email</label>
+              <input id="loginEmail" type="email" required />
+            </div>
+            <div class="form-group">
+              <label id="labelPasswordLogin" for="loginPassword">Contraseña</label>
+              <input id="loginPassword" type="password" required />
+            </div>
+            <button id="btnEntrar" class="primary-button" type="submit">Entrar</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
     <section id="donaciones" class="section">
       <div class="section-header">
         <h2 id="donacionesTitle">Donaciones</h2>
+        <p>Ayuda a más gatos a encontrar hogar.</p>
       </div>
 
       <form id="donationForm" class="donation-form">
         <div class="form-group">
-          <label id="labelTitular">Titular</label>
+          <label id="labelTitular" for="donTitular">Titular</label>
           <input id="donTitular" type="text" required />
         </div>
-
         <div class="form-group">
-          <label id="labelEmailDonacion">Email</label>
+          <label id="labelEmailDonacion" for="donEmail">Email</label>
           <input id="donEmail" type="email" required />
         </div>
-
         <div class="form-group">
-          <label id="labelNumeroTarjeta">Número de tarjeta</label>
+          <label id="labelNumeroTarjeta" for="donTarjeta">Número de tarjeta</label>
           <input id="donTarjeta" type="text" required />
         </div>
-
         <div class="form-row">
           <div class="form-group">
-            <label id="labelCaducidad">Caducidad (MM/YY)</label>
+            <label id="labelCaducidad" for="donCaducidad">Caducidad (MM/YY)</label>
             <input id="donCaducidad" type="text" required />
           </div>
-
           <div class="form-group">
-            <label id="labelCVV">CVV</label>
+            <label id="labelCVV" for="donCVV">CVV</label>
             <input id="donCVV" type="text" required />
           </div>
         </div>
-
         <div class="form-group">
-          <label id="labelCantidad">Cantidad (€)</label>
+          <label id="labelCantidad" for="donCantidad">Cantidad (€)</label>
           <input id="donCantidad" type="number" min="1" required />
         </div>
-
-        <button id="btnDonar" class="primary-button">Donar</button>
+        <button id="btnDonar" class="primary-button" type="submit">Donar</button>
       </form>
     </section>
   </main>
 
-  <!-- FOOTER -->
   <footer class="site-footer">
     <span id="footerText">GatoHub · 2026</span>
   </footer>
 
-  <!-- BOTÓN SUBIR -->
   <button id="backToTop" class="back-to-top">↑</button>
 
-  <!-- MODAL LOGIN / REGISTRO -->
-  <div id="authModal" class="auth-modal hidden">
-    <div class="auth-backdrop"></div>
+  <div id="catModal" class="modal hidden">
+    <div class="modal-backdrop"></div>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-image">
+          <img id="modalImg" src="" alt="Gato" />
+        </div>
+        <div class="modal-body">
+          <button id="closeModal" class="modal-close">✕</button>
+          <div class="modal-header-row">
+            <h3 id="modalName">Nombre</h3>
+            <span id="modalBadgeEdad" class="badge">Edad</span>
+          </div>
+          <p>
+            <strong id="modalBreedLabel">Raza:</strong>
+            <span id="modalBreed"></span>
+          </p>
+          <p>
+            <strong id="modalAgeLabel">Edad:</strong>
+            <span id="modalAge"></span>
+          </p>
 
-    <div class="auth-box">
-      <button id="authClose" class="auth-close">✕</button>
+          <h4 id="modalHistoriaTitle">Historia</h4>
+          <p id="modalHistoria"></p>
 
-      <div class="auth-tabs">
-        <button id="tabLogin" class="auth-tab active">Iniciar sesión</button>
-        <button id="tabRegister" class="auth-tab">Crear cuenta</button>
-      </div>
+          <h4 id="modalPersonalidadTitle">Personalidad</h4>
+          <p id="modalPersonalidad"></p>
 
-      <!-- LOGIN -->
-      <div id="authLoginForm" class="auth-form">
-        <form id="loginFormPanel">
-          <label>Email</label>
-          <input type="email" id="loginEmailPanel" required />
+          <h4 id="modalDetallesTitle">Detalles</h4>
+          <ul class="modal-details-list">
+            <li><span id="colorLabel">Color:</span> <span id="modalColor"></span></li>
+            <li><span id="pesoLabel">Peso:</span> <span id="modalPeso"></span></li>
+            <li><span id="energiaLabel">Energía:</span> <span id="modalEnergia"></span></li>
+          </ul>
 
-          <label>Contraseña</label>
-          <input type="password" id="loginPasswordPanel" required />
+          <div id="modalTags" class="modal-tags"></div>
 
-          <button class="primary-button" type="submit">Entrar</button>
-        </form>
-      </div>
-
-      <!-- REGISTRO -->
-      <div id="authRegisterForm" class="auth-form hidden">
-        <form id="registerFormPanel">
-          <label>Usuario</label>
-          <input type="text" id="regNombrePanel" required />
-
-          <label>Email</label>
-          <input type="email" id="regEmailPanel" required />
-
-          <label>Contraseña</label>
-          <input type="password" id="regPasswordPanel" required />
-
-          <button class="primary-button" type="submit">Crear cuenta</button>
-        </form>
-      </div>
-
-      <div class="auth-google">
-        <button id="authGoogleBtn" class="secondary-button">Continuar con Google</button>
+          <div class="modal-actions">
+            <button id="modalFavBtn" class="secondary-button">Añadir a favoritos</button>
+            <button id="modalAdoptBtn" class="primary-button">Quiero adoptarlo</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
