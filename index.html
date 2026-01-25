@@ -8,226 +8,232 @@
   <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 </head>
 <body>
-  <header class="main-header">
-    <div class="logo">GatoHub</div>
-    <nav class="main-nav">
-      <ul>
-        <li><button id="navGaleria" class="nav-link" type="button">Galería</button></li>
-        <li><button id="navGifs" class="nav-link" type="button">Gifs</button></li>
-        <li><button id="navCuriosidades" class="nav-link" type="button">Curiosidades</button></li>
-        <li><button id="navConsejos" class="nav-link" type="button">Consejos</button></li>
-        <li><button id="navAdopcion" class="nav-link" type="button">Adopción</button></li>
-        <li><button id="navLogin" class="nav-link" type="button">Login</button></li>
-        <li><button id="navDonaciones" class="nav-link" type="button">Donaciones</button></li>
-      </ul>
-    </nav>
-    <div class="header-right">
-      <select id="languageSelect">
-        <option value="es">ES</option>
-        <option value="ca">CA</option>
-        <option value="en">EN</option>
-      </select>
-      <button id="themeToggle" type="button">🌙 Modo oscuro</button>
-      <span id="userInfo" class="user-info"></span>
-      <button id="btnLoginTop" class="secondary-button" type="button">Login</button>
-      <button id="btnRegisterTop" class="secondary-button" type="button">Registro</button>
-      <button id="btnGoogleTop" class="secondary-button" type="button">Google</button>
-      <button id="logoutBtn" class="secondary-button" type="button" style="display:none;">Logout</button>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo-area">
+        <span class="logo-text">GatoHub</span>
+      </div>
+
+      <nav class="main-nav">
+        <a href="#galeria" id="navGaleria">Galería</a>
+        <a href="#gifs" id="navGifs">Gifs</a>
+        <a href="#curiosidades" id="navCuriosidades">Curiosidades</a>
+        <a href="#consejos" id="navConsejos">Consejos</a>
+        <a href="#adopcion" id="navAdopcion">Adopción</a>
+        <a href="#login" id="navLogin">Login</a>
+        <a href="#donaciones" id="navDonaciones">Donaciones</a>
+      </nav>
+
+      <div class="header-controls">
+        <button id="themeToggle" class="pill-button">🌙 Modo oscuro</button>
+
+        <div class="language-wrapper">
+          <select id="languageSelect" class="pill-select">
+            <option value="es">Español</option>
+            <option value="ca">Català</option>
+            <option value="en">English</option>
+          </select>
+        </div>
+
+        <button id="btnLoginTop" class="pill-button">Iniciar sesión</button>
+        <button id="btnRegisterTop" class="pill-button">Crear cuenta</button>
+        <button id="btnGoogleTop" class="pill-button">Google</button>
+
+        <span id="userInfo" style="font-size:0.8rem;opacity:0.8;"></span>
+        <button id="logoutBtn" class="pill-button" style="display:none;">Cerrar sesión</button>
+      </div>
     </div>
   </header>
 
   <main>
-    <!-- HERO -->
     <section class="hero">
       <div class="hero-content">
         <h1 id="heroTitle">Bienvenido a GatoHub</h1>
         <p id="heroSubtitle">Explora la galería, guarda favoritos y descubre historias únicas.</p>
-        <div class="hero-buttons">
-          <button id="btnVerGaleria" class="primary-button" type="button">Ver galería</button>
-          <button id="btnVerGifs" class="secondary-button" type="button">Ver gifs</button>
+
+        <div class="hero-actions">
+          <button id="btnVerGaleria" class="primary-button">Ver galería</button>
+          <button id="btnVerGifs" class="secondary-button">Ver gifs</button>
         </div>
+
         <div class="hero-stats">
-          <div class="stat">
+          <div class="stat-card">
             <span id="statGatosLabel">Gatos</span>
-            <strong id="statTotalGatos">20</strong>
+            <strong id="statTotalGatos">0</strong>
           </div>
-          <div class="stat">
+          <div class="stat-card">
             <span id="statFavoritosLabel">Favoritos</span>
             <strong id="statFavoritos">0</strong>
           </div>
-          <div class="stat">
+          <div class="stat-card">
             <span id="statRonroneosLabel">Ronroneos</span>
             <strong>∞</strong>
           </div>
         </div>
       </div>
+
       <div class="hero-image-wrapper">
-        <img id="heroCatImage" src="assets/img/gato1.jpg" alt="Gato" class="hero-image" />
+        <img id="heroCatImage" src="assets/img/gato1.jpg" alt="Gato destacado" />
       </div>
     </section>
 
-    <!-- GATO DE LA SEMANA -->
-    <section id="weeklyCatSection" class="weekly-cat-section">
-      <div class="container">
-        <h2 id="weeklyCatTitle" class="section-title">🐱 Gato de la semana</h2>
-        <div id="weeklyCatCard" class="weekly-cat-card">
-          <!-- Se rellena por JS -->
-        </div>
-      </div>
-    </section>
-
-    <!-- GALERÍA -->
     <section id="galeria" class="section">
-      <div class="container">
+      <div class="section-header">
         <h2 id="galeriaTitle">Galería de gatos</h2>
         <p id="galeriaSubtitle">Filtra, busca y descubre a cada uno.</p>
+      </div>
 
-        <div class="filters">
-          <input id="searchInput" type="text" placeholder="Buscar por nombre..." />
-          <select id="filterRaza">
-            <option value="todos">Todas las razas</option>
-            <option value="siames">Siamés</option>
-            <option value="persa">Persa</option>
-            <option value="comun">Común europeo</option>
-            <option value="bengali">Bengalí</option>
-            <option value="otra">Otras</option>
-          </select>
-          <select id="filterEdad">
-            <option value="todas">Todas las edades</option>
-            <option value="cachorro">Cachorros</option>
-            <option value="adulto">Adultos</option>
-            <option value="senior">Senior</option>
-          </select>
-          <button id="filterFavoritos" class="secondary-button" type="button">Solo favoritos</button>
-          <button id="clearFilters" class="secondary-button" type="button">Limpiar</button>
-        </div>
+      <div class="filters-bar">
+        <input id="searchInput" type="text" placeholder="Buscar por nombre..." />
+        <select id="filterRaza">
+          <option value="todos">Todas las razas</option>
+          <option value="siames">Siamés</option>
+          <option value="persa">Persa</option>
+          <option value="comun">Común europeo</option>
+          <option value="bengali">Bengalí</option>
+          <option value="otra">Otras</option>
+        </select>
+        <select id="filterEdad">
+          <option value="todas">Todas las edades</option>
+          <option value="cachorro">Cachorros</option>
+          <option value="adulto">Adultos</option>
+          <option value="senior">Senior</option>
+        </select>
+        <button id="filterFavoritos" class="ghost-button">Solo favoritos</button>
+        <button id="clearFilters" class="ghost-button">Limpiar</button>
+      </div>
 
-        <div id="catsGrid" class="cats-grid">
-          <!-- Cards de gatos -->
-        </div>
+      <div id="catsGrid" class="cats-grid"></div>
 
-        <div class="pagination">
-          <button id="prevPage" class="secondary-button" type="button">Anterior</button>
-          <span id="pageInfo">Página 1 / 1</span>
-          <button id="nextPage" class="secondary-button" type="button">Siguiente</button>
-        </div>
+      <div class="pagination">
+        <button id="prevPage" class="ghost-button">Anterior</button>
+        <span id="pageInfo">Página 1 / 1</span>
+        <button id="nextPage" class="ghost-button">Siguiente</button>
       </div>
     </section>
 
-    <!-- GIFS -->
     <section id="gifs" class="section">
-      <div class="container">
+      <div class="section-header">
         <h2 id="gifsTitle">Gifs de gatos</h2>
-        <p>Próximamente: sección de gifs.</p>
+        <p>Un poco de caos felino animado.</p>
+      </div>
+      <div class="gifs-grid">
+        <img src="assets/gifs/gif1.gif" alt="Gif gato 1" class="cat-gif" />
+        <img src="assets/gifs/gif2.gif" alt="Gif gato 2" class="cat-gif" />
+        <img src="assets/gifs/gif3.gif" alt="Gif gato 3" class="cat-gif" />
       </div>
     </section>
 
-    <!-- CURIOSIDADES -->
     <section id="curiosidades" class="section">
-      <div class="container">
+      <div class="section-header">
         <h2 id="curiosidadesTitle">Curiosidades</h2>
-        <ul id="curiosidadesList"></ul>
+        <p>Datos curiosos sobre gatos.</p>
       </div>
+      <ul id="curiosidadesList" class="info-list"></ul>
     </section>
 
-    <!-- CONSEJOS -->
     <section id="consejos" class="section">
-      <div class="container">
+      <div class="section-header">
         <h2 id="consejosTitle">Consejos</h2>
-        <ul id="consejosList"></ul>
+        <p>Cuida mejor de tu compañero felino.</p>
       </div>
+      <ul id="consejosList" class="info-list"></ul>
     </section>
 
-    <!-- ADOPCIÓN -->
     <section id="adopcion" class="section">
-      <div class="container">
+      <div class="section-header">
         <h2 id="adopcionTitle">Formulario de adopción</h2>
-        <form class="adoption-form">
-          <div class="form-group">
-            <label id="labelNombre" for="adopNombre">Nombre completo</label>
-            <input id="adopNombre" type="text" required />
-          </div>
-          <div class="form-group">
-            <label id="labelEmail" for="adopEmail">Correo electrónico</label>
-            <input id="adopEmail" type="email" required />
-          </div>
-          <div class="form-group">
-            <label id="labelTelefono" for="adopTelefono">Teléfono</label>
-            <input id="adopTelefono" type="tel" />
-          </div>
-          <div class="form-group">
-            <label id="labelGatoInteres" for="adopGato">Gato de interés</label>
-            <input id="adopGato" type="text" />
-          </div>
-          <div class="form-group">
-            <label id="labelMensaje" for="adopMensaje">Cuéntanos sobre tu hogar</label>
-            <textarea id="adopMensaje" rows="4"></textarea>
-          </div>
-          <button id="btnEnviarAdopcion" class="primary-button" type="submit">Enviar solicitud</button>
-        </form>
+        <p>Cuéntanos sobre ti y tu hogar.</p>
       </div>
+
+      <form class="adoption-form">
+        <div class="form-group">
+          <label id="labelNombre" for="adopNombre">Nombre completo</label>
+          <input id="adopNombre" type="text" required />
+        </div>
+        <div class="form-group">
+          <label id="labelEmail" for="adopEmail">Correo electrónico</label>
+          <input id="adopEmail" type="email" required />
+        </div>
+        <div class="form-group">
+          <label id="labelTelefono" for="adopTelefono">Teléfono</label>
+          <input id="adopTelefono" type="tel" />
+        </div>
+        <div class="form-group">
+          <label id="labelGatoInteres" for="adopGato">Gato de interés</label>
+          <input id="adopGato" type="text" />
+        </div>
+        <div class="form-group">
+          <label id="labelMensaje" for="adopMensaje">Cuéntanos sobre tu hogar</label>
+          <textarea id="adopMensaje" rows="4"></textarea>
+        </div>
+        <button id="btnEnviarAdopcion" class="primary-button" type="submit">Enviar solicitud</button>
+      </form>
     </section>
 
-    <!-- LOGIN / REGISTRO -->
     <section id="login" class="section">
-      <div class="container">
+      <div class="section-header">
         <h2 id="loginTitle">Acceso</h2>
+        <p>Inicia sesión o crea tu cuenta.</p>
+      </div>
 
-        <div class="auth-forms">
-          <div class="auth-card">
-            <h3 id="crearCuentaTitle">Crear cuenta</h3>
-            <form id="registerForm">
-              <div class="form-group">
-                <label id="labelUsuario" for="regNombre">Usuario</label>
-                <input id="regNombre" type="text" required />
-              </div>
-              <div class="form-group">
-                <label id="labelEmailRegistro" for="regEmail">Email</label>
-                <input id="regEmail" type="email" required />
-              </div>
-              <div class="form-group">
-                <label id="labelPasswordRegistro" for="regPassword">Contraseña</label>
-                <input id="regPassword" type="password" required />
-              </div>
-              <button id="btnRegistrarse" class="primary-button" type="submit">Registrarse</button>
-            </form>
-          </div>
+      <div class="forms-grid">
+        <div class="card">
+          <h3 id="crearCuentaTitle">Crear cuenta</h3>
+          <form id="registerForm">
+            <div class="form-group">
+              <label id="labelUsuario" for="regNombre">Usuario</label>
+              <input id="regNombre" type="text" required />
+            </div>
+            <div class="form-group">
+              <label id="labelEmailRegistro" for="regEmail">Email</label>
+              <input id="regEmail" type="email" required />
+            </div>
+            <div class="form-group">
+              <label id="labelPasswordRegistro" for="regPassword">Contraseña</label>
+              <input id="regPassword" type="password" required />
+            </div>
+            <button id="btnRegistrarse" class="primary-button" type="submit">Registrarse</button>
+          </form>
+        </div>
 
-          <div class="auth-card">
-            <h3 id="iniciarSesionTitle">Iniciar sesión</h3>
-            <form id="loginForm">
-              <div class="form-group">
-                <label id="labelEmailLogin" for="loginEmail">Email</label>
-                <input id="loginEmail" type="email" required />
-              </div>
-              <div class="form-group">
-                <label id="labelPasswordLogin" for="loginPassword">Contraseña</label>
-                <input id="loginPassword" type="password" required />
-              </div>
-              <button id="btnEntrar" class="primary-button" type="submit">Entrar</button>
-            </form>
-          </div>
+        <div class="card">
+          <h3 id="iniciarSesionTitle">Iniciar sesión</h3>
+          <form id="loginForm">
+            <div class="form-group">
+              <label id="labelEmailLogin" for="loginEmail">Email</label>
+              <input id="loginEmail" type="email" required />
+            </div>
+            <div class="form-group">
+              <label id="labelPasswordLogin" for="loginPassword">Contraseña</label>
+              <input id="loginPassword" type="password" required />
+            </div>
+            <button id="btnEntrar" class="primary-button" type="submit">Entrar</button>
+          </form>
         </div>
       </div>
     </section>
 
-    <!-- DONACIONES -->
     <section id="donaciones" class="section">
-      <div class="container">
+      <div class="section-header">
         <h2 id="donacionesTitle">Donaciones</h2>
-        <form id="donationForm">
-          <div class="form-group">
-            <label id="labelTitular" for="donTitular">Titular</label>
-            <input id="donTitular" type="text" required />
-          </div>
-          <div class="form-group">
-            <label id="labelEmailDonacion" for="donEmail">Email</label>
-            <input id="donEmail" type="email" required />
-          </div>
-          <div class="form-group">
-            <label id="labelNumeroTarjeta" for="donTarjeta">Número de tarjeta</label>
-            <input id="donTarjeta" type="text" required />
-          </div>
+        <p>Ayuda a más gatos a encontrar hogar.</p>
+      </div>
+
+      <form id="donationForm" class="donation-form">
+        <div class="form-group">
+          <label id="labelTitular" for="donTitular">Titular</label>
+          <input id="donTitular" type="text" required />
+        </div>
+        <div class="form-group">
+          <label id="labelEmailDonacion" for="donEmail">Email</label>
+          <input id="donEmail" type="email" required />
+        </div>
+        <div class="form-group">
+          <label id="labelNumeroTarjeta" for="donTarjeta">Número de tarjeta</label>
+          <input id="donTarjeta" type="text" required />
+        </div>
+        <div class="form-row">
           <div class="form-group">
             <label id="labelCaducidad" for="donCaducidad">Caducidad (MM/YY)</label>
             <input id="donCaducidad" type="text" required />
@@ -236,37 +242,35 @@
             <label id="labelCVV" for="donCVV">CVV</label>
             <input id="donCVV" type="text" required />
           </div>
-          <div class="form-group">
-            <label id="labelCantidad" for="donCantidad">Cantidad (€)</label>
-            <input id="donCantidad" type="number" min="1" required />
-          </div>
-          <button id="btnDonar" class="primary-button" type="submit">Donar</button>
-        </form>
-      </div>
+        </div>
+        <div class="form-group">
+          <label id="labelCantidad" for="donCantidad">Cantidad (€)</label>
+          <input id="donCantidad" type="number" min="1" required />
+        </div>
+        <button id="btnDonar" class="primary-button" type="submit">Donar</button>
+      </form>
     </section>
   </main>
 
-  <footer class="main-footer">
-    <p id="footerText">GatoHub · 2026</p>
+  <footer class="site-footer">
+    <span id="footerText">GatoHub · 2026</span>
   </footer>
 
-  <!-- BOTÓN BACK TO TOP -->
-  <button id="backToTop" class="back-to-top" type="button">↑</button>
+  <button id="backToTop" class="back-to-top">↑</button>
 
-  <!-- MODAL GATO -->
   <div id="catModal" class="modal hidden">
-    <div class="modal-backdrop">
+    <div class="modal-backdrop"></div>
+    <div class="modal-dialog">
       <div class="modal-content">
-        <button id="closeModal" class="modal-close" type="button">✕</button>
+        <div class="modal-image">
+          <img id="modalImg" src="" alt="Gato" />
+        </div>
         <div class="modal-body">
-          <div class="modal-header">
-            <img id="modalImg" src="" alt="Gato" class="modal-img" />
-            <div class="modal-header-text">
-              <h3 id="modalName"></h3>
-              <span id="modalBadgeEdad" class="badge">Edad</span>
-            </div>
+          <button id="closeModal" class="modal-close">✕</button>
+          <div class="modal-header-row">
+            <h3 id="modalName">Nombre</h3>
+            <span id="modalBadgeEdad" class="badge">Edad</span>
           </div>
-
           <p>
             <strong id="modalBreedLabel">Raza:</strong>
             <span id="modalBreed"></span>
@@ -292,8 +296,8 @@
           <div id="modalTags" class="modal-tags"></div>
 
           <div class="modal-actions">
-            <button id="modalFavBtn" class="secondary-button" type="button">Añadir a favoritos</button>
-            <button id="modalAdoptBtn" class="primary-button" type="button">Quiero adoptarlo</button>
+            <button id="modalFavBtn" class="secondary-button">Añadir a favoritos</button>
+            <button id="modalAdoptBtn" class="primary-button">Quiero adoptarlo</button>
           </div>
         </div>
       </div>
@@ -303,3 +307,4 @@
   <script src="main.js"></script>
 </body>
 </html>
+
