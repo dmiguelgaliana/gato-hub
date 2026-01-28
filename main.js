@@ -1026,3 +1026,380 @@ document.addEventListener("DOMContentLoaded", () => {
     setupAuthForms();
     initSessionUI();
 });
+/* =========================
+   PUZZLE MEJORADO
+========================= */
+
+function initPuzzle() {
+  const container = document.getElementById("puzzleContainer");
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  const randomCat = cats[Math.floor(Math.random() * cats.length)];
+  const img = randomCat.img;
+
+  const pieces = [];
+
+  for (let i = 0; i < 9; i++) {
+    const piece = document.createElement("div");
+    piece.className = "puzzle-piece";
+    piece.style.backgroundImage = `url(${img})`;
+    piece.style.backgroundSize = "300px 300px";
+    piece.style.backgroundPosition = `${-(i % 3) * 100}px ${-Math.floor(i / 3) * 100}px`;
+    piece.dataset.index = i;
+    piece.draggable = true;
+
+    piece.addEventListener("dragstart", e => {
+      e.dataTransfer.setData("text/plain", piece.dataset.index);
+    });
+
+    piece.addEventListener("dragover", e => e.preventDefault());
+
+    piece.addEventListener("drop", e => {
+      e.preventDefault();
+      const fromIndex = e.dataTransfer.getData("text/plain");
+      const toIndex = piece.dataset.index;
+
+      const fromPiece = container.querySelector(`[data-index="${fromIndex}"]`);
+      if (!fromPiece) return;
+
+      const tempPos = piece.style.backgroundPosition;
+      piece.style.backgroundPosition = fromPiece.style.backgroundPosition;
+      fromPiece.style.backgroundPosition = tempPos;
+
+      piece.dataset.index = fromIndex;
+      fromPiece.dataset.index = toIndex;
+
+      checkPuzzleWin();
+    });
+
+    pieces.push(piece);
+  }
+
+  pieces.sort(() => Math.random() - 0.5);
+  pieces.forEach(p => container.appendChild(p));
+}
+
+function checkPuzzleWin() {
+  const container = document.getElementById("puzzleContainer");
+  if (!container) return;
+
+  const pieces = [...container.children];
+  const isCorrect = pieces.every((p, i) => Number(p.dataset.index) === i);
+
+  if (isCorrect && pieces.length > 0) {
+    alert("¡Puzzle completado!");
+  }
+}
+
+const startPuzzleBtn = document.getElementById("startPuzzleBtn");
+if (startPuzzleBtn) {
+  startPuzzleBtn.addEventListener("click", initPuzzle);
+}
+
+/* =========================
+   BLOG FELINO CON MODAL
+========================= */
+
+const blogPosts = [
+  {
+    title: "Cómo cuidar a un gato",
+    text: "Cuidar a un gato implica ofrecerle comida de calidad, agua fresca, un arenero limpio, visitas regulares al veterinario y, sobre todo, atención y cariño. Los gatos necesitan un entorno enriquecido con rascadores, juguetes y lugares elevados donde observar su entorno..."
+  },
+  {
+    title: "Por qué los gatos amasan",
+    text: "El amasado es un comportamiento instintivo que los gatos realizan desde cachorros cuando maman de su madre. En la edad adulta, lo hacen cuando se sienten cómodos, seguros y relajados. También puede ser una forma de marcar con su olor y reforzar el vínculo con su humano..."
+  },
+  {
+    title: "Cómo elegir la mejor comida",
+    text: "Elegir la mejor comida para tu gato requiere fijarse en los ingredientes: un buen porcentaje de proteína animal, pocos cereales y evitar azúcares añadidos. Consulta con tu veterinario si tu gato tiene necesidades especiales, como problemas renales, sobrepeso o alergias..."
+  }
+];
+
+function renderBlog() {
+  const container = document.getElementById("blogPosts");
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  blogPosts.forEach((post, index) => {
+    const div = document.createElement("div");
+    div.className = "blog-post";
+    div.innerHTML = `
+      <h3>${post.title}</h3>
+      <p>${post.text.substring(0, 90)}...</p>
+    `;
+    div.addEventListener("click", () => openBlogModal(index));
+    container.appendChild(div);
+  });
+}
+
+function openBlogModal(index) {
+  const modal = document.getElementById("blogModal");
+  const titleEl = document.getElementById("blogModalTitle");
+  const textEl = document.getElementById("blogModalText");
+  if (!modal || !titleEl || !textEl) return;
+
+  titleEl.textContent = blogPosts[index].title;
+  textEl.textContent = blogPosts[index].text;
+  modal.classList.remove("hidden");
+}
+
+const closeBlogModalBtn = document.getElementById("closeBlogModal");
+if (closeBlogModalBtn) {
+  closeBlogModalBtn.addEventListener("click", () => {
+    const modal = document.getElementById("blogModal");
+    if (modal) modal.classList.add("hidden");
+  });
+}
+
+renderBlog();
+
+/* =========================
+   TEST DE PERSONALIDAD (10 PREGUNTAS + GRÁFICO)
+========================= */
+
+const testQuestionsData = [
+  { q: "¿Cómo te describirías?", t: "tranquilidad" },
+  { q: "¿Te gusta explorar lugares nuevos?", t: "curiosidad" },
+  { q: "¿Te consideras activo?", t: "energia" },
+  { q: "¿Te gusta estar acompañado?", t: "sociabilidad" },
+  { q: "¿Te adaptas rápido a cambios?", t: "adaptabilidad" },
+  { q: "¿Te gusta jugar?", t: "juego" },
+  { q: "¿Eres observador?", t: "curiosidad" },
+  { q: "¿Te gusta descansar mucho?", t: "tranquilidad" },
+  { q: "¿Te gusta interactuar con otros?", t: "sociabilidad" },
+  { q: "¿Te consideras independiente?", t: "independencia" }
+];
+
+function renderTestQuestions() {
+  const container = document.getElementById("testQuestions");
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  testQuestionsData.forEach((item, i) => {
+    const div = document.createElement("div");
+    div.className = "test-question";
+    div.innerHTML = `
+      <h4>${i + 1}. ${item.q}</h4>
+      <label class="test-option"><input type="radio" name="q${i}" value="1"> Poco</label>
+      <label class="test-option"><input type="radio" name="q${i}" value="2"> Normal</label>
+      <label class="test-option"><input type="radio" name="q${i}" value="3"> Mucho</label>
+    `;
+    container.appendChild(div);
+  });
+}
+
+renderTestQuestions();
+
+const submitTestBtn = document.getElementById("submitTestBtn");
+if (submitTestBtn) {
+  submitTestBtn.addEventListener("click", () => {
+    const scores = {
+      tranquilidad: 0,
+      curiosidad: 0,
+      energia: 0,
+      sociabilidad: 0,
+      adaptabilidad: 0,
+      juego: 0,
+      independencia: 0
+    };
+
+    testQuestionsData.forEach((item, i) => {
+      const val = document.querySelector(`input[name="q${i}"]:checked`);
+      if (val) scores[item.t] += Number(val.value);
+    });
+
+    renderTestChart(scores);
+  });
+}
+
+function renderTestChart(scores) {
+  const ctx = document.getElementById("testChart");
+  if (!ctx || typeof Chart === "undefined") return;
+
+  new Chart(ctx, {
+    type: "radar",
+    data: {
+      labels: Object.keys(scores),
+      datasets: [{
+        label: "Tu personalidad felina",
+        data: Object.values(scores),
+        backgroundColor: "rgba(99,102,241,0.3)",
+        borderColor: "#6366f1",
+        borderWidth: 2
+      }]
+    },
+    options: {
+      scales: {
+        r: {
+          suggestedMin: 0,
+          suggestedMax: 12
+        }
+      }
+    }
+  });
+}
+
+/* =========================
+   TIMELINE AVANZADA
+========================= */
+
+const timelineDataAdvanced = [
+  { year: "7500 a.C.", text: "Primeros gatos domesticados en Chipre." },
+  { year: "2500 a.C.", text: "Egipto: los gatos se vuelven sagrados." },
+  { year: "Siglo I", text: "Los gatos llegan a Europa." },
+  { year: "Edad Media", text: "Persecución por supersticiones." },
+  { year: "Siglo XVIII", text: "Los gatos se popularizan como mascotas." },
+  { year: "Siglo XIX", text: "Primeras razas modernas." },
+  { year: "Actualidad", text: "Los gatos son una de las mascotas más populares del mundo." }
+];
+
+function renderTimelineAdvanced() {
+  const container = document.getElementById("timelineContainer");
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  timelineDataAdvanced.forEach(item => {
+    const div = document.createElement("div");
+    div.className = "timeline-item";
+    div.innerHTML = `
+      <div class="timeline-year">${item.year}</div>
+      <div class="timeline-text">${item.text}</div>
+    `;
+    container.appendChild(div);
+  });
+}
+
+renderTimelineAdvanced();
+
+/* =========================
+   TARJETAS 3D MEJORADAS
+========================= */
+
+function render3DCards() {
+  const container = document.getElementById("cards3dContainer");
+  if (!container) return;
+
+  container.innerHTML = "";
+
+  cats.slice(0, 6).forEach(cat => {
+    const card = document.createElement("div");
+    card.className = "card-3d";
+
+    card.innerHTML = `
+      <div class="card-3d-inner">
+        <div class="card-3d-front">
+          <div>
+            <h3>${cat.nombre}</h3>
+            <p>${cat.raza}</p>
+          </div>
+        </div>
+        <div class="card-3d-back" style="background-image:url('${cat.img}')"></div>
+      </div>
+    `;
+
+    card.addEventListener("click", () => {
+      card.classList.toggle("flipped");
+    });
+
+    container.appendChild(card);
+  });
+}
+
+render3DCards();
+
+/* =========================
+   GENERADOR DE NOMBRES
+========================= */
+
+const namePrefixes = ["Luna", "Michi", "Neko", "Kira", "Sombra", "Pixel", "Nube", "Coco", "Mora", "Rayo"];
+const nameSuffixes = ["-chan", "-kun", "ito", "ín", "ón", "sky", "chi", "nyan", "ito", "ko"];
+
+function generateCatName() {
+  const p = namePrefixes[Math.floor(Math.random() * namePrefixes.length)];
+  const s = nameSuffixes[Math.floor(Math.random() * nameSuffixes.length)];
+  return p + s;
+}
+
+const generateNameBtn = document.getElementById("generateNameBtn");
+if (generateNameBtn) {
+  generateNameBtn.addEventListener("click", () => {
+    const out = document.getElementById("generatedName");
+    if (!out) return;
+    out.textContent = generateCatName();
+  });
+}
+
+/* =========================
+   CALCULADORA FELINA
+========================= */
+
+const calcAgeBtn = document.getElementById("calcAgeBtn");
+if (calcAgeBtn) {
+  calcAgeBtn.addEventListener("click", () => {
+    const input = document.getElementById("humanYearsInput");
+    const result = document.getElementById("catAgeResult");
+    if (!input || !result) return;
+
+    const humanYears = Number(input.value);
+    if (!humanYears || humanYears <= 0) {
+      result.textContent = "Introduce una edad válida.";
+      return;
+    }
+
+    // Fórmula simple aproximada
+    let catYears;
+    if (humanYears <= 1) {
+      catYears = 15;
+    } else if (humanYears === 2) {
+      catYears = 24;
+    } else {
+      catYears = 24 + (humanYears - 2) * 4;
+    }
+
+    result.textContent = `Equivalente aproximado: ${catYears} años felinos.`;
+  });
+}
+
+/* =========================
+   RECOMENDADOR VISUAL DE PRODUCTOS
+========================= */
+
+const productImages = {
+  tranquilo: "assets/img/products/cama.jpg",
+  jugueton: "assets/img/products/juguetes.jpg",
+  curioso: "assets/img/products/torre.jpg",
+  independiente: "assets/img/products/automatico.jpg"
+};
+
+const recommendBtn = document.getElementById("recommendBtn");
+if (recommendBtn) {
+  recommendBtn.addEventListener("click", () => {
+    const select = document.getElementById("personalitySelect");
+    const result = document.getElementById("recommendationResult");
+    if (!select || !result) return;
+
+    const type = select.value;
+    if (!type) {
+      result.textContent = "Selecciona una opción.";
+      return;
+    }
+
+    const map = {
+      tranquilo: "Cama suave + rascador bajo para gatos calmados.",
+      jugueton: "Pelotas, cañas y juguetes interactivos para gastar energía.",
+      curioso: "Torres altas, túneles y estanterías para explorar.",
+      independiente: "Comederos automáticos y camas elevadas para gatos autónomos."
+    };
+
+    result.innerHTML = `
+      <img src="${productImages[type]}" alt="Producto recomendado">
+      <p>${map[type]}</p>
+    `;
+  });
+}
+
