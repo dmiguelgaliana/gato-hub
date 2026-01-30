@@ -1271,7 +1271,6 @@ const nextQuestionBtn = document.getElementById("nextQuestionBtn");
 const progressBar = document.getElementById("progressBar");
 const testResult = document.getElementById("testResult");
 const testDescription = document.getElementById("testDescription");
-const restartTestBtn = document.getElementById("restartTestBtn");
 
 startTestBtn.addEventListener("click", () => {
   testStartScreen.classList.add("hidden");
@@ -1360,26 +1359,6 @@ function showResults() {
 
   testDescription.textContent = descriptions[max];
 }
-
-restartTestBtn.addEventListener("click", () => {
-  // Reiniciar valores
-  testIndex = 0;
-  testScores = { tranquilidad: 0, juego: 0, curiosidad: 0, independencia: 0 };
-
-  // Ocultar resultados
-  testResult.classList.add("hidden");
-
-  // Resetear barra de progreso
-  progressBar.style.width = "0%";
-
-  // Mostrar pantalla inicial
-  testStartScreen.classList.remove("hidden");
-
-  // Limpiar gráfico anterior si existe
-  const chartCanvas = document.getElementById("testChart");
-  if (chartCanvas && chartCanvas.chartInstance) {
-    chartCanvas.chartInstance.destroy();
-  }
 });
 
 
