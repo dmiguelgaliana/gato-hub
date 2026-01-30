@@ -710,21 +710,69 @@ body.dark .stat-card {
   cursor: pointer;
 }
 
-/* Test personalidad */
-.test-question {
-  margin-bottom: 1.2rem;
-  padding: 1rem;
-  border-radius: 1rem;
+/* Test profesional */
+#testContainer {
+  max-width: 600px;
+  margin: auto;
+}
+
+#progressBarContainer {
+  width: 100%;
+  height: 10px;
+  background: var(--border-subtle);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+#progressBar {
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+  transition: width 0.4s ease;
+}
+
+#testCard {
   background: var(--bg);
+  padding: 2rem;
+  border-radius: 1.2rem;
   border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft);
+  opacity: 0;
+  transform: translateX(40px);
+  transition: all 0.4s ease;
 }
-.test-question h4 {
-  margin: 0 0 0.5rem;
+
+#testCard.active {
+  opacity: 1;
+  transform: translateX(0);
 }
-.test-option {
-  display: block;
-  margin: 0.3rem 0;
+
+.test-answer-btn {
+  width: 100%;
+  padding: 0.8rem;
+  margin: 0.4rem 0;
+  border-radius: 0.8rem;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg);
+  cursor: pointer;
+  transition: 0.2s;
 }
+
+.test-answer-btn:hover {
+  background: var(--accent-light);
+}
+
+.test-answer-btn.selected {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+#testResult {
+  text-align: center;
+}
+
 
 /* Timeline avanzada */
 .timeline-advanced {
