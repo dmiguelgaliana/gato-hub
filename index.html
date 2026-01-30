@@ -164,16 +164,35 @@
   <div id="blogPosts" class="blog-grid"></div>
 </section>
 
-<!-- TEST PERSONALIDAD -->
 <section id="testPersonalidad" class="section">
   <div class="section-header">
     <h2>Test de personalidad felina</h2>
     <p>Responde 10 preguntas y descubre tu perfil felino.</p>
   </div>
-  <div id="testQuestions"></div>
-  <button id="submitTestBtn" class="primary-button" style="margin-top:1rem;">Ver resultados</button>
-  <canvas id="testChart" style="margin-top:2rem; max-width:500px;"></canvas>
+
+  <div id="testStartScreen">
+    <button id="startTestBtn" class="primary-button">Comenzar test</button>
+  </div>
+
+  <div id="testContainer" class="hidden">
+    <div id="progressBarContainer">
+      <div id="progressBar"></div>
+    </div>
+
+    <div id="testCard">
+      <h3 id="testQuestion"></h3>
+      <div id="testAnswers"></div>
+      <button id="nextQuestionBtn" class="primary-button" disabled>Siguiente</button>
+    </div>
+  </div>
+
+  <div id="testResult" class="hidden">
+    <canvas id="testChart" style="max-width:500px;margin:auto;"></canvas>
+    <p id="testDescription" style="margin-top:1rem;font-size:1.2rem;"></p>
+    <button id="restartTestBtn" class="secondary-button" style="margin-top:1rem;">Rehacer test</button>
+  </div>
 </section>
+
 
 <!-- TIMELINE -->
 <section id="timeline" class="section">
