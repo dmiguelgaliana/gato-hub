@@ -1157,91 +1157,218 @@ if (closeBlogModalBtn) {
 renderBlog();
 
 /* =========================
-   TEST DE PERSONALIDAD (10 PREGUNTAS + GRÁFICO)
+   TEST PROFESIONAL (SLIDE + PROGRESO + GRÁFICO)
 ========================= */
 
-const testQuestionsData = [
-  { q: "¿Cómo te describirías?", t: "tranquilidad" },
-  { q: "¿Te gusta explorar lugares nuevos?", t: "curiosidad" },
-  { q: "¿Te consideras activo?", t: "energia" },
-  { q: "¿Te gusta estar acompañado?", t: "sociabilidad" },
-  { q: "¿Te adaptas rápido a cambios?", t: "adaptabilidad" },
-  { q: "¿Te gusta jugar?", t: "juego" },
-  { q: "¿Eres observador?", t: "curiosidad" },
-  { q: "¿Te gusta descansar mucho?", t: "tranquilidad" },
-  { q: "¿Te gusta interactuar con otros?", t: "sociabilidad" },
-  { q: "¿Te consideras independiente?", t: "independencia" }
+const testQuestions = [
+  {
+    q: "¿Qué tipo de gato te atrae más?",
+    answers: [
+      { text: "Tranquilo y cariñoso", type: "tranquilidad" },
+      { text: "Juguetón y activo", type: "juego" },
+      { text: "Curioso y explorador", type: "curiosidad" },
+      { text: "Independiente y observador", type: "independencia" }
+    ]
+  },
+  {
+    q: "¿Qué ambiente prefieres en casa?",
+    answers: [
+      { text: "Silencioso y relajado", type: "tranquilidad" },
+      { text: "Con actividad y movimiento", type: "juego" },
+      { text: "Con rincones para explorar", type: "curiosidad" },
+      { text: "Con espacios altos y escondites", type: "independencia" }
+    ]
+  },
+  {
+    q: "¿Qué te gusta hacer con un gato?",
+    answers: [
+      { text: "Acariciarlo mientras descansa", type: "tranquilidad" },
+      { text: "Jugar con juguetes interactivos", type: "juego" },
+      { text: "Enseñarle trucos o retos", type: "curiosidad" },
+      { text: "Dejar que explore libremente", type: "independencia" }
+    ]
+  },
+  {
+    q: "¿Qué tipo de vínculo buscas?",
+    answers: [
+      { text: "Mucho contacto y mimos", type: "tranquilidad" },
+      { text: "Juego diario y energía", type: "juego" },
+      { text: "Conexión mental y curiosidad", type: "curiosidad" },
+      { text: "Compañía sin demasiada demanda", type: "independencia" }
+    ]
+  },
+  {
+    q: "¿Qué te parece más importante en un gato?",
+    answers: [
+      { text: "Que sea calmado", type: "tranquilidad" },
+      { text: "Que sea divertido", type: "juego" },
+      { text: "Que sea inteligente", type: "curiosidad" },
+      { text: "Que sea independiente", type: "independencia" }
+    ]
+  },
+  {
+    q: "¿Cómo reaccionas ante un gato tímido?",
+    answers: [
+      { text: "Le doy espacio y paciencia", type: "tranquilidad" },
+      { text: "Intento jugar para animarlo", type: "juego" },
+      { text: "Le hablo suave y observo", type: "curiosidad" },
+      { text: "Lo dejo totalmente a su ritmo", type: "independencia" }
+    ]
+  },
+  {
+    q: "¿Qué tipo de hogar tienes?",
+    answers: [
+      { text: "Muy tranquilo", type: "tranquilidad" },
+      { text: "Con bastante actividad", type: "juego" },
+      { text: "Con espacios variados", type: "curiosidad" },
+      { text: "Con zonas altas y escondites", type: "independencia" }
+    ]
+  },
+  {
+    q: "¿Qué te gusta más de los gatos?",
+    answers: [
+      { text: "Su calma", type: "tranquilidad" },
+      { text: "Su energía", type: "juego" },
+      { text: "Su curiosidad", type: "curiosidad" },
+      { text: "Su independencia", type: "independencia" }
+    ]
+  },
+  {
+    q: "¿Qué prefieres en un gato adoptado?",
+    answers: [
+      { text: "Que sea cariñoso", type: "tranquilidad" },
+      { text: "Que sea juguetón", type: "juego" },
+      { text: "Que sea curioso", type: "curiosidad" },
+      { text: "Que sea autónomo", type: "independencia" }
+    ]
+  },
+  {
+    q: "¿Qué interacción diaria te gustaría?",
+    answers: [
+      { text: "Mimos y compañía", type: "tranquilidad" },
+      { text: "Juegos y actividad", type: "juego" },
+      { text: "Explorar juntos", type: "curiosidad" },
+      { text: "Convivencia tranquila", type: "independencia" }
+    ]
+  }
 ];
 
-function renderTestQuestions() {
-  const container = document.getElementById("testQuestions");
-  if (!container) return;
+let testIndex = 0;
+let testScores = {
+  tranquilidad: 0,
+  juego: 0,
+  curiosidad: 0,
+  independencia: 0
+};
 
-  container.innerHTML = "";
+const startTestBtn = document.getElementById("startTestBtn");
+const testContainer = document.getElementById("testContainer");
+const testStartScreen = document.getElementById("testStartScreen");
+const testCard = document.getElementById("testCard");
+const testQuestion = document.getElementById("testQuestion");
+const testAnswers = document.getElementById("testAnswers");
+const nextQuestionBtn = document.getElementById("nextQuestionBtn");
+const progressBar = document.getElementById("progressBar");
+const testResult = document.getElementById("testResult");
+const testDescription = document.getElementById("testDescription");
+const restartTestBtn = document.getElementById("restartTestBtn");
 
-  testQuestionsData.forEach((item, i) => {
-    const div = document.createElement("div");
-    div.className = "test-question";
-    div.innerHTML = `
-      <h4>${i + 1}. ${item.q}</h4>
-      <label class="test-option"><input type="radio" name="q${i}" value="1"> Poco</label>
-      <label class="test-option"><input type="radio" name="q${i}" value="2"> Normal</label>
-      <label class="test-option"><input type="radio" name="q${i}" value="3"> Mucho</label>
-    `;
-    container.appendChild(div);
-  });
-}
+startTestBtn.addEventListener("click", () => {
+  testStartScreen.classList.add("hidden");
+  testContainer.classList.remove("hidden");
+  loadQuestion();
+});
 
-renderTestQuestions();
+function loadQuestion() {
+  const q = testQuestions[testIndex];
+  testQuestion.textContent = q.q;
 
-const submitTestBtn = document.getElementById("submitTestBtn");
-if (submitTestBtn) {
-  submitTestBtn.addEventListener("click", () => {
-    const scores = {
-      tranquilidad: 0,
-      curiosidad: 0,
-      energia: 0,
-      sociabilidad: 0,
-      adaptabilidad: 0,
-      juego: 0,
-      independencia: 0
-    };
+  testAnswers.innerHTML = "";
+  nextQuestionBtn.disabled = true;
 
-    testQuestionsData.forEach((item, i) => {
-      const val = document.querySelector(`input[name="q${i}"]:checked`);
-      if (val) scores[item.t] += Number(val.value);
+  q.answers.forEach((ans, i) => {
+    const btn = document.createElement("button");
+    btn.className = "test-answer-btn";
+    btn.textContent = ans.text;
+
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".test-answer-btn").forEach(b => b.classList.remove("selected"));
+      btn.classList.add("selected");
+      nextQuestionBtn.disabled = false;
+      nextQuestionBtn.dataset.type = ans.type;
     });
 
-    renderTestChart(scores);
+    testAnswers.appendChild(btn);
   });
+
+  testCard.classList.remove("active");
+  setTimeout(() => testCard.classList.add("active"), 50);
+
+  progressBar.style.width = ((testIndex) / testQuestions.length) * 100 + "%";
 }
 
-function renderTestChart(scores) {
+nextQuestionBtn.addEventListener("click", () => {
+  const type = nextQuestionBtn.dataset.type;
+  testScores[type]++;
+
+  testIndex++;
+
+  if (testIndex >= testQuestions.length) {
+    showResults();
+  } else {
+    loadQuestion();
+  }
+});
+
+function showResults() {
+  testContainer.classList.add("hidden");
+  testResult.classList.remove("hidden");
+
+  progressBar.style.width = "100%";
+
   const ctx = document.getElementById("testChart");
-  if (!ctx || typeof Chart === "undefined") return;
 
   new Chart(ctx, {
     type: "radar",
     data: {
-      labels: Object.keys(scores),
+      labels: ["Tranquilidad", "Juego", "Curiosidad", "Independencia"],
       datasets: [{
         label: "Tu personalidad felina",
-        data: Object.values(scores),
+        data: [
+          testScores.tranquilidad,
+          testScores.juego,
+          testScores.curiosidad,
+          testScores.independencia
+        ],
         backgroundColor: "rgba(99,102,241,0.3)",
         borderColor: "#6366f1",
         borderWidth: 2
       }]
-    },
-    options: {
-      scales: {
-        r: {
-          suggestedMin: 0,
-          suggestedMax: 12
-        }
-      }
     }
   });
+
+  const max = Object.keys(testScores).reduce((a, b) =>
+    testScores[a] > testScores[b] ? a : b
+  );
+
+  const descriptions = {
+    tranquilidad: "Eres un alma calmada: te encantan los gatos cariñosos y relajados.",
+    juego: "Tienes energía felina: te encantan los gatos activos y juguetones.",
+    curiosidad: "Tu mente es inquieta: conectas con gatos curiosos e inteligentes.",
+    independencia: "Valoras la libertad: te atraen los gatos autónomos y observadores."
+  };
+
+  testDescription.textContent = descriptions[max];
 }
+
+restartTestBtn.addEventListener("click", () => {
+  testIndex = 0;
+  testScores = { tranquilidad: 0, juego: 0, curiosidad: 0, independencia: 0 };
+
+  testResult.classList.add("hidden");
+  testStartScreen.classList.remove("hidden");
+});
+
 
 /* =========================
    TIMELINE AVANZADA
