@@ -1271,6 +1271,7 @@ const nextQuestionBtn = document.getElementById("nextQuestionBtn");
 const progressBar = document.getElementById("progressBar");
 const testResult = document.getElementById("testResult");
 const testDescription = document.getElementById("testDescription");
+const restartTestBtn = document.getElementById("restartTestBtn");
 
 startTestBtn.addEventListener("click", () => {
   testStartScreen.classList.add("hidden");
@@ -1359,6 +1360,13 @@ function showResults() {
 
   testDescription.textContent = descriptions[max];
 }
+
+restartTestBtn.addEventListener("click", () => {
+  testIndex = 0;
+  testScores = { tranquilidad: 0, juego: 0, curiosidad: 0, independencia: 0 };
+
+  testResult.classList.add("hidden");
+  testStartScreen.classList.remove("hidden");
 });
 
 
