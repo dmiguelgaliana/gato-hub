@@ -1530,3 +1530,184 @@ if (recommendBtn) {
   });
 }
 
+/* =========================
+   CHATBOT FELINO
+========================= */
+const chatWindow = document.getElementById("chatWindow");
+const chatInput = document.getElementById("chatInput");
+const chatSendBtn = document.getElementById("chatSendBtn");
+const catPersonalitySelect = document.getElementById("catPersonality");
+
+function addChatMessage(text, from = "cat") {
+  if (!chatWindow) return;
+  const wrapper = document.createElement("div");
+  wrapper.className = `chat-message ${from}`;
+  const avatar = document.createElement("div");
+  avatar.className = "avatar";
+  avatar.textContent = from === "cat" ? "🐱" : "🧑";
+  const bubble = document.createElement("div");
+  bubble.className = "bubble";
+  bubble.textContent = text;
+  wrapper.appendChild(avatar);
+  wrapper.appendChild(bubble);
+  chatWindow.appendChild(wrapper);
+  chatWindow.scrollTop = chatWindow.scrollHeight;
+}
+
+function getCatReply(userText) {
+  const mood = catPersonalitySelect.value;
+  const text = userText.toLowerCase();
+
+  const generic = ["por qué", "porque", "duerm", "comida", "jugar", "maull", "rasc"];
+  const isGeneric = generic.some(w => text.includes(w));
+
+  if (mood === "sarcastico") {
+    if (isGeneric) return "Porque soy un gato y no tengo que justificar nada, humano.";
+    return "Interesante pregunta. No la voy a responder, pero interesante.";
+  }
+
+  if (mood === "sabio") {
+    if (isGeneric) return "Dormimos mucho para conservar energía y observar el mundo con calma.";
+    return "Cada gato es un universo. Observa y entenderás.";
+  }
+
+  if (mood === "travieso") {
+    if (isGeneric) return "Si no rompo algo al día, no duermo tranquilo. Es ciencia.";
+    return "Miau miau *tira algo de la mesa*... perdón, ¿decías algo?";
+  }
+
+  return isGeneric
+    ? "Duermo, juego y como porque así soy feliz. Y si yo soy feliz, tú también."
+    : "Miau, eso suena importante. Yo solo quiero mimos y latitas, pero te apoyo.";
+}
+
+if (chatSendBtn) {
+  chatSendBtn.addEventListener("click", () => {
+    const text = chatInput.value.trim();
+    if (!text) return;
+    addChatMessage(text, "user");
+    chatInput.value = "";
+    setTimeout(() => addChatMessage(getCatReply(text), "cat"), 400);
+  });
+
+  chatInput.addEventListener("keydown", e => {
+    if (e.key === "Enter") chatSendBtn.click();
+  });
+}
+
+/* =========================
+   HISTORIA INTERACTIVA
+========================= */
+const storyCard = document.getElementById("storyCard");
+const storyTextEl = document.getElementById("storyText");
+const storyOptionsEl = document.getElementById("storyOptions");
+const restartStoryBtn = document.getElementById("restartStoryBtn");
+
+const storyNodes = {
+  inicio: {
+    text: "Te despiertas dentro de una caja de cartón en una calle tranquila. ¿Qué haces?",
+    options: [
+      { text: "Explorar la calle", next: "explorar" },
+      { text: "Maullar para llamar la atención", next: "maullar" },
+      { text: "Volver a dormir", next: "dormir" },
+      { text: "Buscar comida", next: "comida" }
+    ]
+  },
+  explorar: {
+    text: "Sales de la caja y ves un jardín, una azotea accesible y un contenedor. ¿A dónde vas?",
+    options: [
+      { text: "Subir a la azotea", next: "azotea" },
+      { text: "Ir al jardín", next: "jardin" },
+      { text: "Investigar el contenedor", next: "contenedor" }
+    ]
+  },
+  maullar: {
+    text: "Una persona se acerca al oírte. Te habla suave y te ofrece la mano.",
+    options: [
+      { text: "Acercarte y frotarte", next: "adoptado" },
+      { text: "Salir corriendo", next: "explorar" }
+    ]
+  },
+  dormir: {
+    text: "Te vuelves a dormir. Cuando despiertas, la caja está dentro de una protectora.",
+    options: [
+      { text: "Explorar la protectora", next: "protectora" },
+      { text: "Quedarte en tu cama nueva", next: "casero" }
+    ]
+  },
+  comida: {
+    text: "Sigues tu olfato y encuentras un plato de comida cerca de una puerta.",
+    options: [
+      { text: "Comer y quedarte cerca", next: "casero" },
+      { text: "Comer y seguir explorando", next: "explorar" }
+    ]
+  },
+  azotea: {
+    text: "Desde la azotea ves toda la ciudad. Te sientes libre y poderoso.",
+    options: [
+      { text: "Convertirte en líder de la colonia", next: "lider" },
+      { text: "Buscar un lugar soleado para dormir", next: "aventurero" }
+    ]
+  },
+  jardin: {
+    text: "En el jardín hay pájaros, plantas y una ventana abierta.",
+    options: [
+      { text: "Entrar por la ventana", next: "casero" },
+      { text: "Perseguir pájaros", next: "aventurero" }
+    ]
+  },
+  contenedor: {
+    text: "Encuentras restos de comida y otros gatos callejeros.",
+    options: [
+      { text: "Unirte a ellos", next: "lider" },
+      { text: "Volver a la caja", next: "inicio" }
+    ]
+  },
+  protectora: {
+    text: "Te observan, te revisan y te ponen un nombre en una ficha.",
+    options: [
+      { text: "Mostrar tu mejor ronroneo", next: "adoptado" },
+      { text: "Esconderte en la caseta", next: "casero" }
+    ]
+  },
+  adoptado: { text: "Final: Gato adoptado. Has encontrado un hogar lleno de mimos.", options: [] },
+  casero: { text: "Final: Gato casero. Tu lugar favorito es el sofá y la ventana.", options: [] },
+  aventurero: { text: "Final: Gato aventurero. Cada día es una nueva misión.", options: [] },
+  lider: { text: "Final: Líder de colonia. Otros gatos te siguen.", options: [] }
+};
+
+let currentStoryNode = "inicio";
+
+function renderStoryNode() {
+  const node = storyNodes[currentStoryNode];
+  storyTextEl.textContent = node.text;
+  storyOptionsEl.innerHTML = "";
+  storyCard.classList.remove("active");
+  setTimeout(() => storyCard.classList.add("active"), 30);
+
+  if (!node.options.length) {
+    restartStoryBtn.classList.remove("hidden");
+    return;
+  }
+
+  restartStoryBtn.classList.add("hidden");
+
+  node.options.forEach(opt => {
+    const btn = document.createElement("button");
+    btn.className = "story-option-btn";
+    btn.textContent = opt.text;
+    btn.addEventListener("click", () => {
+      currentStoryNode = opt.next;
+      renderStoryNode();
+    });
+    storyOptionsEl.appendChild(btn);
+  });
+}
+
+renderStoryNode();
+
+restartStoryBtn.addEventListener("click", () => {
+  currentStoryNode = "inicio";
+  renderStoryNode();
+});
+
