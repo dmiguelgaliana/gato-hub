@@ -193,6 +193,21 @@
   </div>
 </section>
 
+<!-- HISTORIA INTERACTIVA -->
+<section id="historiaInteractiva" class="section">
+  <div class="section-header">
+    <h2>Historia interactiva felina</h2>
+    <p>Elige qué harías si fueras un gato.</p>
+  </div>
+
+  <div id="storyCard">
+    <h3 id="storyText"></h3>
+    <div id="storyOptions"></div>
+    <button id="restartStoryBtn" class="secondary-button hidden" style="margin-top:1rem;">
+      Volver a empezar
+    </button>
+  </div>
+</section>
 
 
 <!-- TIMELINE -->
@@ -263,6 +278,37 @@
   <button id="recommendBtn" class="primary-button">Recomendar</button>
   <div id="recommendationResult" class="recommendation"></div>
 </section>
+
+<!-- CHATBOT FELINO -->
+<section id="chatbot" class="section">
+  <div class="section-header">
+    <h2>Chat con un gato</h2>
+    <p>Hazle preguntas a un gato virtual con mucha personalidad.</p>
+  </div>
+
+  <div style="margin-bottom:0.8rem;">
+    <label for="catPersonality">Personalidad del gato:</label>
+    <select id="catPersonality">
+      <option value="adorable">Adorable</option>
+      <option value="sarcastico">Sarcástico</option>
+      <option value="sabio">Sabio</option>
+      <option value="travieso">Travieso</option>
+    </select>
+  </div>
+
+  <div id="chatWindow">
+    <div class="chat-message cat">
+      <div class="avatar">🐱</div>
+      <div class="bubble">Miau, humano. ¿Qué quieres saber sobre los gatos?</div>
+    </div>
+  </div>
+
+  <div id="chatInputRow">
+    <input id="chatInput" type="text" placeholder="Escribe tu pregunta..." />
+    <button id="chatSendBtn" class="primary-button">Enviar</button>
+  </div>
+</section>
+
 
 <!-- MODAL BLOG -->
 <div id="blogModal" class="modal hidden">
